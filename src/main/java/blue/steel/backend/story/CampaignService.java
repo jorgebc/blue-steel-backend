@@ -1,4 +1,4 @@
-package blue.steel.backend.campaing;
+package blue.steel.backend.story;
 
 import org.springframework.stereotype.Service;
 

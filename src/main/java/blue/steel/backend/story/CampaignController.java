@@ -1,4 +1,4 @@
-package blue.steel.backend.campaing;
+package blue.steel.backend.story;
 
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;

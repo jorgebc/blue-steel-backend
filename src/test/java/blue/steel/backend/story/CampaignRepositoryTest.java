@@ -1,7 +1,5 @@
-package blue.steel.backend.campaign;
+package blue.steel.backend.story;
 
-import blue.steel.backend.campaing.Campaign;
-import blue.steel.backend.campaing.CampaignRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,7 +16,11 @@ public class CampaignRepositoryTest {
   @Test
   @DisplayName("Find campaign by actual should not find a campaign")
   void findByActualShouldNotFindCampaign() {
+    // Given no actual campaign
+    // When searching by actual
     Optional<Campaign> campaign = campaignRepository.findByActual(true);
+
+    // Then the campaign should not be present
     Assertions.assertThat(campaign).isNotPresent();
   }
 
@@ -37,7 +39,7 @@ public class CampaignRepositoryTest {
     Assertions.assertThat(actualCampaign).isPresent();
   }
 
-  private Campaign createCampaign() {
+  public static Campaign createCampaign() {
     Campaign campaign = new Campaign();
     campaign.setName("Campaign");
     campaign.setDescription("Description");
