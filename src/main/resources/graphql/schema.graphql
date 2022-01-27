@@ -1,0 +1,11 @@
+type Query {
+    actualCampaign: Campaign
+}
+
+type Campaign {
+    id: ID!
+    name: String!
+    description: String!
+    imageUrl: String!
+    actual: Boolean!
+}
