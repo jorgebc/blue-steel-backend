@@ -2,6 +2,10 @@ type Query {
     actualCampaign: Campaign
 }
 
+type Mutation {
+    createCampaign(input: CreateCampaignInput!): CreateCampaignPayload
+}
+
 type Campaign {
     id: ID!
     name: String!
@@ -9,3 +13,14 @@ type Campaign {
     imageUrl: String!
     actual: Boolean!
 }
+
+input CreateCampaignInput {
+    name: String!
+    description: String!
+    imageUrl: String!
+}
+
+type CreateCampaignPayload {
+    campaign: Campaign
+}
+

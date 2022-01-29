@@ -3,13 +3,13 @@ package blue.steel.backend.story;
 import javax.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
-/** Campaign service. */
+/** Campaign query service. */
 @Service
-public class CampaignService {
+public class CampaignQueryService {
 
   private final CampaignRepository campaignRepository;
 
-  public CampaignService(CampaignRepository campaignRepository) {
+  public CampaignQueryService(CampaignRepository campaignRepository) {
     this.campaignRepository = campaignRepository;
   }
 

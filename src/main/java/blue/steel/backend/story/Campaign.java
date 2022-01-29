@@ -5,6 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -21,11 +22,12 @@ public class Campaign {
   @GeneratedValue(generator = "UUID")
   private UUID id;
 
-  private String name;
+  @NotNull private String name;
 
+  @NotNull
   @Column(columnDefinition = "TEXT")
   private String description;
 
-  private String imageUrl;
+  @NotNull private String imageUrl;
   private boolean actual;
 }

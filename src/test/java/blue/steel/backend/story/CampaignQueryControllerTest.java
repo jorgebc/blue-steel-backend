@@ -12,7 +12,7 @@ import org.springframework.graphql.test.tester.WebGraphQlTester;
 
 @SpringBootTest
 @AutoConfigureWebGraphQlTester
-class CampaignControllerTest {
+class CampaignQueryControllerTest {
 
   @Autowired private WebGraphQlTester graphQlTester;
   @Autowired private CampaignRepository campaignRepository;
@@ -28,7 +28,7 @@ class CampaignControllerTest {
 
     // When fetching for actual campaign
     this.graphQlTester
-        .queryName("story/actualCampaign")
+        .queryName("story/queries/actualCampaign")
         .execute()
         .path("actualCampaign")
         .entity(Campaign.class)
@@ -45,7 +45,7 @@ class CampaignControllerTest {
 
     // When fetching for actual campaign
     this.graphQlTester
-        .queryName("story/actualCampaign")
+        .queryName("story/queries/actualCampaign")
         .execute()
         .errors()
 
