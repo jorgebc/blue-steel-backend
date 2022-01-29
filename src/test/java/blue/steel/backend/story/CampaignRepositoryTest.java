@@ -1,17 +1,30 @@
 package blue.steel.backend.story;
 
+import java.util.Optional;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.util.Optional;
-
+/** Campaign repository tests. */
 @DataJpaTest
 public class CampaignRepositoryTest {
 
   @Autowired private CampaignRepository campaignRepository;
+
+  /**
+   * Creates a Campaign, no id set and actual to false.
+   *
+   * @return Campaign
+   */
+  public static Campaign createCampaign() {
+    Campaign campaign = new Campaign();
+    campaign.setName("Campaign");
+    campaign.setDescription("Description");
+    campaign.setImageUrl("url");
+    return campaign;
+  }
 
   @Test
   @DisplayName("Find campaign by actual should not find a campaign")
@@ -37,13 +50,5 @@ public class CampaignRepositoryTest {
 
     // Then the campaign should be present
     Assertions.assertThat(actualCampaign).isPresent();
-  }
-
-  public static Campaign createCampaign() {
-    Campaign campaign = new Campaign();
-    campaign.setName("Campaign");
-    campaign.setDescription("Description");
-    campaign.setImageUrl("url");
-    return campaign;
   }
 }

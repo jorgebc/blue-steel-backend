@@ -1,9 +1,9 @@
 package blue.steel.backend.story;
 
+import javax.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
-
+/** Campaign service. */
 @Service
 public class CampaignService {
 

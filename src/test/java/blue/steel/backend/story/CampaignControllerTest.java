@@ -1,15 +1,14 @@
 package blue.steel.backend.story;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
+import javax.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.graphql.tester.AutoConfigureWebGraphQlTester;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.graphql.test.tester.WebGraphQlTester;
-
-import javax.persistence.EntityNotFoundException;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest
 @AutoConfigureWebGraphQlTester

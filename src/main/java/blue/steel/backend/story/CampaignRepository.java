@@ -1,11 +1,11 @@
 package blue.steel.backend.story;
 
+import java.util.Optional;
+import java.util.UUID;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-import java.util.UUID;
-
+/** Campaign JPA repository. */
 @Repository
 public interface CampaignRepository extends CrudRepository<Campaign, UUID> {
 
