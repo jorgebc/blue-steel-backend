@@ -2,8 +2,8 @@ package blue.steel.backend.story;
 
 import lombok.Value;
 
-/** Create campaign payload response. */
+/** Update campaign payload response. */
 @Value
-public class CreateCampaignPayload {
+public class UpdateCampaignPayload {
   Campaign campaign;
 }
