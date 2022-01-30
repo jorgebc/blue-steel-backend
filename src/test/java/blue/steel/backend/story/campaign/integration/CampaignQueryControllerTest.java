@@ -1,7 +1,10 @@
-package blue.steel.backend.story;
+package blue.steel.backend.story.campaign.integration;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import blue.steel.backend.story.campaign.entity.Campaign;
+import blue.steel.backend.story.campaign.entity.CampaignRepository;
+import blue.steel.backend.story.campaign.entity.CampaignRepositoryTest;
 import javax.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,7 +23,6 @@ class CampaignQueryControllerTest {
   @Test
   @DisplayName("Fetching for the actual campaign should return an actual campaign")
   void getActualCampaign() {
-
     // Given a campaign with actual set to true
     Campaign actualCampaign = CampaignRepositoryTest.createCampaign();
     actualCampaign.setActual(true);
@@ -28,7 +30,7 @@ class CampaignQueryControllerTest {
 
     // When fetching for actual campaign
     this.graphQlTester
-        .queryName("story/queries/actualCampaign")
+        .queryName("story/campaign/queries/actualCampaign")
         .execute()
         .path("actualCampaign")
         .entity(Campaign.class)
@@ -40,12 +42,11 @@ class CampaignQueryControllerTest {
   @Test
   @DisplayName("Fetching for the actual campaign should return error")
   void getActualCampaignWhenNoActualCampaign() {
-
     // Given no actual campaign
 
     // When fetching for actual campaign
     this.graphQlTester
-        .queryName("story/queries/actualCampaign")
+        .queryName("story/campaign/queries/actualCampaign")
         .execute()
         .errors()
 

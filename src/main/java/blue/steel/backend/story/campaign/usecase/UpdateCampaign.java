@@ -1,29 +1,21 @@
-package blue.steel.backend.story;
+package blue.steel.backend.story.campaign.usecase;
 
+import blue.steel.backend.story.campaign.entity.Campaign;
+import blue.steel.backend.story.campaign.entity.CampaignRepository;
 import java.util.UUID;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
-/** Campaign mutation service. */
+/** Update campaign use case. */
 @Service
 @Transactional
-public class CampaignMutationService {
+public class UpdateCampaign {
 
   private final CampaignRepository campaignRepository;
 
-  public CampaignMutationService(CampaignRepository campaignRepository) {
+  public UpdateCampaign(CampaignRepository campaignRepository) {
     this.campaignRepository = campaignRepository;
-  }
-
-  /**
-   * Creates a new campaign.
-   *
-   * @param campaign new campaign data
-   * @return the created campaign
-   */
-  public Campaign create(Campaign campaign) {
-    return campaignRepository.save(campaign);
   }
 
   /**

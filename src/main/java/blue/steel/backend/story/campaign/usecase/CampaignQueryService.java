@@ -1,5 +1,7 @@
-package blue.steel.backend.story;
+package blue.steel.backend.story.campaign.usecase;
 
+import blue.steel.backend.story.campaign.entity.Campaign;
+import blue.steel.backend.story.campaign.entity.CampaignRepository;
 import javax.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 

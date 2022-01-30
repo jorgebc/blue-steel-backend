@@ -1,15 +1,13 @@
-package blue.steel.backend.story;
+package blue.steel.backend.story.campaign.adapter.dto;
 
+import blue.steel.backend.story.campaign.entity.Campaign;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.util.UUID;
 import javax.validation.constraints.NotNull;
 import lombok.Value;
 
-/** Update campaign input. */
+/** Create campaign input. */
 @Value
-public class UpdateCampaignInput {
-  @NotNull UUID id;
-
+public class CreateCampaignInput {
   @NotNull String name;
 
   @NotNull String description;

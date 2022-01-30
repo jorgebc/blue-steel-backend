@@ -1,5 +1,12 @@
-package blue.steel.backend.story;
+package blue.steel.backend.story.campaign.adapter;
 
+import blue.steel.backend.story.campaign.adapter.dto.CreateCampaignInput;
+import blue.steel.backend.story.campaign.adapter.dto.CreateCampaignPayload;
+import blue.steel.backend.story.campaign.adapter.dto.UpdateCampaignInput;
+import blue.steel.backend.story.campaign.adapter.dto.UpdateCampaignPayload;
+import blue.steel.backend.story.campaign.entity.Campaign;
+import blue.steel.backend.story.campaign.usecase.CreateCampaign;
+import blue.steel.backend.story.campaign.usecase.UpdateCampaign;
 import java.util.UUID;
 import javax.validation.Valid;
 import org.jetbrains.annotations.NotNull;
@@ -11,10 +18,12 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class CampaignMutationController {
 
-  private final CampaignMutationService campaignMutationService;
+  private final CreateCampaign createCampaign;
+  private final UpdateCampaign updateCampaign;
 
-  public CampaignMutationController(CampaignMutationService campaignMutationService) {
-    this.campaignMutationService = campaignMutationService;
+  public CampaignMutationController(CreateCampaign createCampaign, UpdateCampaign updateCampaign) {
+    this.createCampaign = createCampaign;
+    this.updateCampaign = updateCampaign;
   }
 
   /**
@@ -26,7 +35,7 @@ public class CampaignMutationController {
   @MutationMapping
   public CreateCampaignPayload createCampaign(@Argument @Valid @NotNull CreateCampaignInput input) {
     Campaign campaign = input.getCampaign();
-    campaign = campaignMutationService.create(campaign);
+    campaign = createCampaign.create(campaign);
     return new CreateCampaignPayload(campaign);
   }
 
@@ -40,7 +49,7 @@ public class CampaignMutationController {
   public UpdateCampaignPayload updateCampaign(@Argument @Valid @NotNull UpdateCampaignInput input) {
     Campaign campaign = input.getCampaign();
     UUID id = input.getId();
-    campaign = campaignMutationService.update(id, campaign);
+    campaign = updateCampaign.update(id, campaign);
     return new UpdateCampaignPayload(campaign);
   }
 }

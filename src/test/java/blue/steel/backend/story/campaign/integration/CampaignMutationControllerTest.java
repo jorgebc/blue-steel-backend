@@ -1,7 +1,12 @@
-package blue.steel.backend.story;
+package blue.steel.backend.story.campaign.integration;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import blue.steel.backend.story.campaign.adapter.dto.CreateCampaignInput;
+import blue.steel.backend.story.campaign.adapter.dto.UpdateCampaignInput;
+import blue.steel.backend.story.campaign.entity.Campaign;
+import blue.steel.backend.story.campaign.entity.CampaignRepository;
+import blue.steel.backend.story.campaign.entity.CampaignRepositoryTest;
 import java.util.UUID;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,7 +32,7 @@ public class CampaignMutationControllerTest {
 
     // When creating a campaign
     graphQlTester
-        .queryName("story/queries/createCampaign")
+        .queryName("story/campaign/queries/createCampaign")
         .variable("input", createCampaignInput)
         .execute()
         .path("createCampaign.campaign")
@@ -51,7 +56,7 @@ public class CampaignMutationControllerTest {
 
     // When updating a campaign
     graphQlTester
-        .queryName("story/queries/updateCampaign")
+        .queryName("story/campaign/queries/updateCampaign")
         .variable("input", createCampaignInput)
         .execute()
         .path("updateCampaign.campaign")
