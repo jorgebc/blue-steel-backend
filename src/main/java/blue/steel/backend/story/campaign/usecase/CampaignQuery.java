@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 
 /** Campaign query service. */
 @Service
-public class CampaignQueryService {
+public class CampaignQuery {
 
   private final CampaignRepository campaignRepository;
 
-  public CampaignQueryService(CampaignRepository campaignRepository) {
+  public CampaignQuery(CampaignRepository campaignRepository) {
     this.campaignRepository = campaignRepository;
   }
 

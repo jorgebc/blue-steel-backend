@@ -15,7 +15,7 @@ import org.springframework.graphql.test.tester.WebGraphQlTester;
 
 @SpringBootTest
 @AutoConfigureWebGraphQlTester
-class CampaignQueryControllerTest {
+class CampaignQueryTest {
 
   @Autowired private WebGraphQlTester graphQlTester;
   @Autowired private CampaignRepository campaignRepository;
