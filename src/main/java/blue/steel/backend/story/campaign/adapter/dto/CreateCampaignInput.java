@@ -2,17 +2,17 @@ package blue.steel.backend.story.campaign.adapter.dto;
 
 import blue.steel.backend.story.campaign.entity.Campaign;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import lombok.Value;
 
 /** Create campaign input. */
 @Value
 public class CreateCampaignInput {
-  @NotNull String name;
+  @NotEmpty String name;
 
-  @NotNull String description;
+  @NotEmpty String description;
 
-  @NotNull String imageUrl;
+  @NotEmpty String imageUrl;
 
   /**
    * Maps the data to a new campaign.
