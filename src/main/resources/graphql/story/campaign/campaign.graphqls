@@ -1,6 +1,7 @@
 type Query {
-    getCampaign(id: ID!): Campaign
-    getActualCampaign: Campaign
+    getCampaigns: GetCampaignsPayload
+    getCampaign(input: GetCampaignInput!): GetCampaignPayload
+    getActualCampaign: GetActualCampaignPayload
 }
 
 type Mutation {
@@ -14,6 +15,22 @@ type Campaign {
     description: String!
     imageUrl: String!
     actual: Boolean!
+}
+
+type GetCampaignsPayload {
+    campaigns: [Campaign]
+}
+
+input GetCampaignInput {
+    campaignId: ID!
+}
+
+type GetActualCampaignPayload {
+    campaign: Campaign
+}
+
+type GetCampaignPayload {
+    campaign: Campaign
 }
 
 input CreateCampaignInput {

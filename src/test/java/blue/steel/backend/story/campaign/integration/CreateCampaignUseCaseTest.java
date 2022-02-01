@@ -5,6 +5,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import blue.steel.backend.story.campaign.adapter.dto.CreateCampaignInput;
 import blue.steel.backend.story.campaign.entity.Campaign;
 import java.util.Arrays;
+import javax.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.graphql.test.tester.WebGraphQlTester;
 /** Create campaign use case tests. */
 @SpringBootTest
 @AutoConfigureWebGraphQlTester
+@Transactional
 public class CreateCampaignUseCaseTest {
 
   public static final String CREATE_CAMPAIGN_QUERY = "story/campaign/queries/createCampaign";

@@ -8,6 +8,7 @@ import blue.steel.backend.story.campaign.entity.CampaignRepository;
 import blue.steel.backend.story.campaign.entity.CampaignRepositoryTest;
 import java.util.Arrays;
 import java.util.UUID;
+import javax.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.graphql.test.tester.WebGraphQlTester;
 /** Update campaign use case tests. */
 @SpringBootTest
 @AutoConfigureWebGraphQlTester
+@Transactional
 public class UpdateCampaignUseCaseTest {
 
   private static final String UPDATE_CAMPAIGN_QUERY = "story/campaign/queries/updateCampaign";

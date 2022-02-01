@@ -2,6 +2,7 @@ package blue.steel.backend.story.campaign.usecase;
 
 import blue.steel.backend.story.campaign.entity.Campaign;
 import blue.steel.backend.story.campaign.entity.CampaignRepository;
+import java.util.Collection;
 import java.util.UUID;
 import javax.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
@@ -22,5 +23,9 @@ public class CampaignQuery {
 
   public Campaign findActualCampaign() {
     return campaignRepository.findByActual(true).orElseThrow(EntityNotFoundException::new);
+  }
+
+  public Collection<Campaign> findAll() {
+    return campaignRepository.findAll();
   }
 }

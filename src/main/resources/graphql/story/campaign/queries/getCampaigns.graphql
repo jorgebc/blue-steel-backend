@@ -1,6 +1,6 @@
-query GetActualCampaign {
-    getActualCampaign {
-        campaign {
+query GetCampaigns {
+    getCampaigns {
+        campaigns {
             id
             name
             description

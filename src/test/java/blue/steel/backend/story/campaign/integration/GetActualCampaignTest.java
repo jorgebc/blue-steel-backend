@@ -5,6 +5,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import blue.steel.backend.story.campaign.entity.Campaign;
 import blue.steel.backend.story.campaign.entity.CampaignRepository;
 import blue.steel.backend.story.campaign.entity.CampaignRepositoryTest;
+import javax.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.graphql.test.tester.WebGraphQlTester;
 
 @SpringBootTest
 @AutoConfigureWebGraphQlTester
+@Transactional
 class GetActualCampaignTest {
 
   public static final String ACTUAL_CAMPAIGN_QUERY = "story/campaign/queries/getActualCampaign";
@@ -34,7 +36,7 @@ class GetActualCampaignTest {
     this.graphQlTester
         .queryName(ACTUAL_CAMPAIGN_QUERY)
         .execute()
-        .path("getActualCampaign")
+        .path("getActualCampaign.campaign")
         .entity(Campaign.class)
 
         // Then response should contain a campaign

@@ -1,8 +1,10 @@
-query GetCampaign($id: ID!) {
-    getCampaign(id: $id) {
-        id
-        name
-        description
-        imageUrl
+query GetCampaign($input: GetCampaignInput!) {
+    getCampaign(input: $input) {
+        campaign {
+            id
+            name
+            description
+            imageUrl
+        }
     }
 }
