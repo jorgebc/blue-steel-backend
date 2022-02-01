@@ -1,5 +1,6 @@
 type Query {
-    actualCampaign: Campaign
+    getCampaign(id: ID!): Campaign
+    getActualCampaign: Campaign
 }
 
 type Mutation {

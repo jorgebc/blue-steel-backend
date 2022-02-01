@@ -5,6 +5,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import blue.steel.backend.story.campaign.entity.Campaign;
 import blue.steel.backend.story.campaign.entity.CampaignRepository;
 import blue.steel.backend.story.campaign.entity.CampaignRepositoryTest;
+import java.util.UUID;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,40 +16,42 @@ import org.springframework.graphql.test.tester.WebGraphQlTester;
 
 @SpringBootTest
 @AutoConfigureWebGraphQlTester
-class CampaignQueryTest {
+class GetCampaignTest {
 
-  public static final String ACTUAL_CAMPAIGN_QUERY = "story/campaign/queries/actualCampaign";
+  public static final String GET_CAMPAIGN_QUERY = "story/campaign/queries/getCampaign";
 
   @Autowired private WebGraphQlTester graphQlTester;
   @Autowired private CampaignRepository campaignRepository;
 
   @Test
-  @DisplayName("Fetching for the actual campaign should return an actual campaign")
+  @DisplayName("Fetching for an existing campaign should return a campaign")
   void getActualCampaign() {
-    // Given a campaign with actual set to true
-    Campaign actualCampaign = CampaignRepositoryTest.createCampaign();
-    actualCampaign.setActual(true);
-    campaignRepository.save(actualCampaign);
+    // Given a campaign
+    Campaign campaign = CampaignRepositoryTest.createCampaign();
+    campaignRepository.save(campaign);
 
-    // When fetching for actual campaign
+    // When fetching the campaign
     this.graphQlTester
-        .queryName(ACTUAL_CAMPAIGN_QUERY)
+        .queryName(GET_CAMPAIGN_QUERY)
+        .variable("id", campaign.getId())
         .execute()
-        .path("actualCampaign")
+        .path("getCampaign")
         .entity(Campaign.class)
 
         // Then response should contain a campaign
-        .satisfies(campaign -> assertThat(campaign).isNotNull());
+        .satisfies(
+            fetchedCampaign -> assertThat(fetchedCampaign.getId()).isEqualTo(campaign.getId()));
   }
 
   @Test
-  @DisplayName("Fetching for the actual campaign should return not found error")
+  @DisplayName("Fetching for a non existing campaign should return not found error")
   void getActualCampaignWhenNoActualCampaign() {
-    // Given no actual campaign
+    // Given no campaign
 
-    // When fetching for actual campaign
+    // When fetching for a campaign
     this.graphQlTester
-        .queryName(ACTUAL_CAMPAIGN_QUERY)
+        .queryName(GET_CAMPAIGN_QUERY)
+        .variable("id", UUID.randomUUID())
         .execute()
         .errors()
 

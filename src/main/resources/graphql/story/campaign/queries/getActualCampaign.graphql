@@ -1,5 +1,5 @@
-query actualCampaign {
-    actualCampaign {
+query GetActualCampaign {
+    getActualCampaign {
         id
         name
         description

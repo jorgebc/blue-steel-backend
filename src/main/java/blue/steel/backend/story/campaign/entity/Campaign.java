@@ -8,13 +8,11 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 /** Campaign JPA entity. */
 @Entity
 @Getter
 @Setter
-@ToString
 public class Campaign {
 
   @Id
