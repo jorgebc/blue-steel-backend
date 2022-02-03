@@ -1,9 +1,17 @@
 package blue.steel.backend.story.campaign.adapter;
 
-import blue.steel.backend.story.campaign.adapter.dto.*;
+import blue.steel.backend.story.campaign.adapter.dto.CreateCampaignInput;
+import blue.steel.backend.story.campaign.adapter.dto.CreateCampaignPayload;
+import blue.steel.backend.story.campaign.adapter.dto.DeleteCampaignInput;
+import blue.steel.backend.story.campaign.adapter.dto.DeleteCampaignPayload;
+import blue.steel.backend.story.campaign.adapter.dto.SetActualCampaignInput;
+import blue.steel.backend.story.campaign.adapter.dto.SetActualCampaignPayload;
+import blue.steel.backend.story.campaign.adapter.dto.UpdateCampaignInput;
+import blue.steel.backend.story.campaign.adapter.dto.UpdateCampaignPayload;
 import blue.steel.backend.story.campaign.entity.Campaign;
 import blue.steel.backend.story.campaign.usecase.CreateCampaign;
 import blue.steel.backend.story.campaign.usecase.DeleteCampaign;
+import blue.steel.backend.story.campaign.usecase.SetActualCampaign;
 import blue.steel.backend.story.campaign.usecase.UpdateCampaign;
 import java.util.UUID;
 import javax.validation.Valid;
@@ -19,12 +27,25 @@ public class CampaignMutationController {
   private final CreateCampaign createCampaign;
   private final UpdateCampaign updateCampaign;
   private final DeleteCampaign deleteCampaign;
+  private final SetActualCampaign setActualCampaign;
 
+  /**
+   * Constructor.
+   *
+   * @param createCampaign create campaign use case
+   * @param updateCampaign update campaign use case
+   * @param deleteCampaign delete campaign use case
+   * @param setActualCampaign set actual campaign use case
+   */
   public CampaignMutationController(
-      CreateCampaign createCampaign, UpdateCampaign updateCampaign, DeleteCampaign deleteCampaign) {
+      CreateCampaign createCampaign,
+      UpdateCampaign updateCampaign,
+      DeleteCampaign deleteCampaign,
+      SetActualCampaign setActualCampaign) {
     this.createCampaign = createCampaign;
     this.updateCampaign = updateCampaign;
     this.deleteCampaign = deleteCampaign;
+    this.setActualCampaign = setActualCampaign;
   }
 
   /**
@@ -55,7 +76,7 @@ public class CampaignMutationController {
   }
 
   /**
-   * Deletes an existing campaign
+   * Deletes an existing campaign.
    *
    * @param input campaign id
    * @return the deleted campaign id
@@ -65,5 +86,19 @@ public class CampaignMutationController {
     UUID campaignId = input.getCampaignId();
     UUID deletedCampaignId = deleteCampaign.delete(campaignId);
     return new DeleteCampaignPayload(deletedCampaignId);
+  }
+
+  /**
+   * Set a campaign to be the actual.
+   *
+   * @param input campaign id
+   * @return the actual campaign
+   */
+  @MutationMapping
+  public SetActualCampaignPayload setActualCampaign(
+      @Argument @Valid @NotNull SetActualCampaignInput input) {
+    UUID campaignId = input.getCampaignId();
+    Campaign actualCampaign = setActualCampaign.setActual(campaignId);
+    return new SetActualCampaignPayload(actualCampaign);
   }
 }

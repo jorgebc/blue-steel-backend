@@ -22,7 +22,7 @@ import org.springframework.graphql.test.tester.WebGraphQlTester;
 @SpringBootTest
 @AutoConfigureWebGraphQlTester
 @Transactional
-public class DeleteCampaignUseCaseTest {
+class DeleteCampaignUseCaseTest {
 
   private static final String DELETE_CAMPAIGN_QUERY = "story/campaign/queries/deleteCampaign";
 
@@ -72,7 +72,7 @@ public class DeleteCampaignUseCaseTest {
         .verify();
   }
 
-  @Disabled
+  @Disabled("Not null annotation does not behave as Not empty and others when attribute is null")
   @Test
   @DisplayName("Deleting a campaign with invalid payload should return bad request error")
   void deleteInvalidCampaign() {

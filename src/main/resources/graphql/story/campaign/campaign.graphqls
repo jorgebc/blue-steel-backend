@@ -8,6 +8,7 @@ type Mutation {
     createCampaign(input: CreateCampaignInput!): CreateCampaignPayload!
     updateCampaign(input: UpdateCampaignInput!): UpdateCampaignPayload!
     deleteCampaign(input: DeleteCampaignInput!): DeleteCampaignPayload!
+    setActualCampaign(input: SetActualCampaignInput!): SetActualCampaignPayload!
 }
 
 type Campaign {
@@ -61,5 +62,13 @@ input DeleteCampaignInput {
 
 type DeleteCampaignPayload {
     campaignId: ID!
+}
+
+input SetActualCampaignInput {
+    campaignId: ID!
+}
+
+type SetActualCampaignPayload {
+    campaign: Campaign!
 }
 

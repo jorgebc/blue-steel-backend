@@ -18,7 +18,7 @@ import org.springframework.graphql.test.tester.WebGraphQlTester;
 @SpringBootTest
 @AutoConfigureWebGraphQlTester
 @Transactional
-public class CreateCampaignUseCaseTest {
+class CreateCampaignUseCaseTest {
 
   public static final String CREATE_CAMPAIGN_QUERY = "story/campaign/queries/createCampaign";
 

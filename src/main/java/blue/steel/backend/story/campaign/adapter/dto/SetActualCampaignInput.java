@@ -4,8 +4,8 @@ import java.util.UUID;
 import javax.validation.constraints.NotNull;
 import lombok.Value;
 
-/** Delete campaign input. */
+/** Set actual campaign input. */
 @Value
-public class DeleteCampaignInput {
+public class SetActualCampaignInput {
   @NotNull UUID campaignId;
 }

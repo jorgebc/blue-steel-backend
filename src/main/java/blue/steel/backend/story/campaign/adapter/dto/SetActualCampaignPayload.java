@@ -3,8 +3,8 @@ package blue.steel.backend.story.campaign.adapter.dto;
 import blue.steel.backend.story.campaign.entity.Campaign;
 import lombok.Value;
 
-/** Get actual campaign payload. */
+/** Set actual campaigns payload. */
 @Value
-public class GetActualCampaignPayload {
+public class SetActualCampaignPayload {
   Campaign campaign;
 }
