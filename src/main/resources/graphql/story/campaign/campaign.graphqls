@@ -1,12 +1,13 @@
 type Query {
-    getCampaigns: GetCampaignsPayload
-    getCampaign(input: GetCampaignInput!): GetCampaignPayload
-    getActualCampaign: GetActualCampaignPayload
+    getCampaigns: GetCampaignsPayload!
+    getCampaign(input: GetCampaignInput!): GetCampaignPayload!
+    getActualCampaign: GetActualCampaignPayload!
 }
 
 type Mutation {
-    createCampaign(input: CreateCampaignInput!): CreateCampaignPayload
-    updateCampaign(input: UpdateCampaignInput!): UpdateCampaignPayload
+    createCampaign(input: CreateCampaignInput!): CreateCampaignPayload!
+    updateCampaign(input: UpdateCampaignInput!): UpdateCampaignPayload!
+    deleteCampaign(input: DeleteCampaignInput!): DeleteCampaignPayload!
 }
 
 type Campaign {
@@ -26,11 +27,11 @@ input GetCampaignInput {
 }
 
 type GetActualCampaignPayload {
-    campaign: Campaign
+    campaign: Campaign!
 }
 
 type GetCampaignPayload {
-    campaign: Campaign
+    campaign: Campaign!
 }
 
 input CreateCampaignInput {
@@ -40,7 +41,7 @@ input CreateCampaignInput {
 }
 
 type CreateCampaignPayload {
-    campaign: Campaign
+    campaign: Campaign!
 }
 
 input UpdateCampaignInput {
@@ -51,6 +52,14 @@ input UpdateCampaignInput {
 }
 
 type UpdateCampaignPayload {
-    campaign: Campaign
+    campaign: Campaign!
+}
+
+input DeleteCampaignInput {
+    campaignId: ID!
+}
+
+type DeleteCampaignPayload {
+    campaignId: ID!
 }
 
