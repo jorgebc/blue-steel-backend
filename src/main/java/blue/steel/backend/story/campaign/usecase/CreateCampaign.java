@@ -1,14 +1,18 @@
 package blue.steel.backend.story.campaign.usecase;
 
+import blue.steel.backend.core.usecase.UseCase;
 import blue.steel.backend.story.campaign.entity.Campaign;
 import blue.steel.backend.story.campaign.entity.CampaignRepository;
+import blue.steel.backend.story.campaign.usecase.dto.CreateCampaignUseCaseInput;
+import blue.steel.backend.story.campaign.usecase.dto.CreateCampaignUseCaseOutput;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 /** Create campaign use case. */
 @Service
 @Transactional
-public class CreateCampaign {
+public class CreateCampaign
+    implements UseCase<CreateCampaignUseCaseInput, CreateCampaignUseCaseOutput> {
 
   private final CampaignRepository campaignRepository;
 
@@ -19,10 +23,13 @@ public class CreateCampaign {
   /**
    * Creates a new campaign.
    *
-   * @param campaign new campaign data
+   * @param input new campaign data
    * @return the created campaign
    */
-  public Campaign create(Campaign campaign) {
-    return campaignRepository.save(campaign);
+  @Override
+  public CreateCampaignUseCaseOutput execute(CreateCampaignUseCaseInput input) {
+    Campaign campaign = input.getCampaign();
+    campaign = campaignRepository.save(campaign);
+    return new CreateCampaignUseCaseOutput(campaign);
   }
 }

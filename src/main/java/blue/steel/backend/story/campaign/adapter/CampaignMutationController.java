@@ -1,5 +1,6 @@
 package blue.steel.backend.story.campaign.adapter;
 
+import blue.steel.backend.core.usecase.UseCase;
 import blue.steel.backend.story.campaign.adapter.dto.CreateCampaignInput;
 import blue.steel.backend.story.campaign.adapter.dto.CreateCampaignPayload;
 import blue.steel.backend.story.campaign.adapter.dto.DeleteCampaignInput;
@@ -9,10 +10,11 @@ import blue.steel.backend.story.campaign.adapter.dto.SetActualCampaignPayload;
 import blue.steel.backend.story.campaign.adapter.dto.UpdateCampaignInput;
 import blue.steel.backend.story.campaign.adapter.dto.UpdateCampaignPayload;
 import blue.steel.backend.story.campaign.entity.Campaign;
-import blue.steel.backend.story.campaign.usecase.CreateCampaign;
 import blue.steel.backend.story.campaign.usecase.DeleteCampaign;
 import blue.steel.backend.story.campaign.usecase.SetActualCampaign;
 import blue.steel.backend.story.campaign.usecase.UpdateCampaign;
+import blue.steel.backend.story.campaign.usecase.dto.CreateCampaignUseCaseInput;
+import blue.steel.backend.story.campaign.usecase.dto.CreateCampaignUseCaseOutput;
 import java.util.UUID;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -24,7 +26,7 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class CampaignMutationController {
 
-  private final CreateCampaign createCampaign;
+  private final UseCase<CreateCampaignUseCaseInput, CreateCampaignUseCaseOutput> createCampaign;
   private final UpdateCampaign updateCampaign;
   private final DeleteCampaign deleteCampaign;
   private final SetActualCampaign setActualCampaign;
@@ -38,7 +40,7 @@ public class CampaignMutationController {
    * @param setActualCampaign set actual campaign use case
    */
   public CampaignMutationController(
-      CreateCampaign createCampaign,
+      UseCase<CreateCampaignUseCaseInput, CreateCampaignUseCaseOutput> createCampaign,
       UpdateCampaign updateCampaign,
       DeleteCampaign deleteCampaign,
       SetActualCampaign setActualCampaign) {
@@ -56,9 +58,10 @@ public class CampaignMutationController {
    */
   @MutationMapping
   public CreateCampaignPayload createCampaign(@Argument @Valid @NotNull CreateCampaignInput input) {
-    Campaign campaign = input.getCampaign();
-    campaign = createCampaign.create(campaign);
-    return new CreateCampaignPayload(campaign);
+    CreateCampaignUseCaseInput createCampaignInput = input.getCreateCampaignUseCaseInput();
+    CreateCampaignUseCaseOutput createCampaignOutput = createCampaign.execute(createCampaignInput);
+    Campaign createdCampaign = createCampaignOutput.getCreatedCampaign();
+    return new CreateCampaignPayload(createdCampaign);
   }
 
   /**

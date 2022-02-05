@@ -1,6 +1,6 @@
 package blue.steel.backend.story.campaign.adapter.dto;
 
-import blue.steel.backend.story.campaign.entity.Campaign;
+import blue.steel.backend.story.campaign.usecase.dto.CreateCampaignUseCaseInput;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.validation.constraints.NotEmpty;
 import lombok.Value;
@@ -15,16 +15,12 @@ public class CreateCampaignInput {
   @NotEmpty String imageUrl;
 
   /**
-   * Maps the data to a new campaign.
+   * Maps the data to a new creation campaign use case input.
    *
-   * @return new campaign with input data
+   * @return create campaign use case data
    */
   @JsonIgnore
-  public Campaign getCampaign() {
-    Campaign campaign = new Campaign();
-    campaign.setName(getName());
-    campaign.setDescription(getDescription());
-    campaign.setImageUrl(getImageUrl());
-    return campaign;
+  public CreateCampaignUseCaseInput getCreateCampaignUseCaseInput() {
+    return new CreateCampaignUseCaseInput(name, description, imageUrl);
   }
 }
