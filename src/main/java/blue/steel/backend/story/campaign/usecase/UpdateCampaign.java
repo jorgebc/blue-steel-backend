@@ -1,7 +1,10 @@
 package blue.steel.backend.story.campaign.usecase;
 
+import blue.steel.backend.core.usecase.UseCase;
 import blue.steel.backend.story.campaign.entity.Campaign;
 import blue.steel.backend.story.campaign.entity.CampaignRepository;
+import blue.steel.backend.story.campaign.usecase.dto.UpdateCampaignUseCaseInput;
+import blue.steel.backend.story.campaign.usecase.dto.UpdateCampaignUseCaseOutput;
 import java.util.UUID;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
@@ -10,7 +13,8 @@ import org.springframework.stereotype.Service;
 /** Update campaign use case. */
 @Service
 @Transactional
-public class UpdateCampaign {
+public class UpdateCampaign
+    implements UseCase<UpdateCampaignUseCaseInput, UpdateCampaignUseCaseOutput> {
 
   private final CampaignRepository campaignRepository;
 
@@ -21,17 +25,20 @@ public class UpdateCampaign {
   /**
    * Updates a campaign.
    *
-   * @param id campaign id
-   * @param newValues updated campaign values
+   * @param input campaign id and updated campaign values
    * @return the updated campaign
    */
-  public Campaign update(UUID id, Campaign newValues) {
+  @Override
+  public UpdateCampaignUseCaseOutput execute(UpdateCampaignUseCaseInput input) {
+    UUID id = input.getCampaignId();
     Campaign campaign = campaignRepository.findById(id).orElseThrow(EntityNotFoundException::new);
 
-    campaign.setName(newValues.getName());
-    campaign.setDescription(newValues.getDescription());
-    campaign.setImageUrl(newValues.getImageUrl());
+    campaign.setName(input.getName());
+    campaign.setDescription(input.getDescription());
+    campaign.setImageUrl(input.getImageUrl());
 
-    return campaignRepository.save(campaign);
+    campaign = campaignRepository.save(campaign);
+
+    return new UpdateCampaignUseCaseOutput(campaign);
   }
 }

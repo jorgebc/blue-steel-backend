@@ -1,6 +1,7 @@
 package blue.steel.backend.story.campaign.adapter.dto;
 
 import blue.steel.backend.story.campaign.entity.Campaign;
+import blue.steel.backend.story.campaign.usecase.dto.UpdateCampaignUseCaseInput;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.UUID;
 import javax.validation.constraints.NotEmpty;
@@ -19,16 +20,16 @@ public class UpdateCampaignInput {
   @NotEmpty String imageUrl;
 
   /**
-   * Maps the data to a new campaign.
+   * Maps the data to a new update campaign use case input.
    *
    * @return new campaign with input data
    */
   @JsonIgnore
-  public Campaign getCampaign() {
+  public UpdateCampaignUseCaseInput getUpdateCampaignUseCaseInput() {
     Campaign campaign = new Campaign();
     campaign.setName(getName());
     campaign.setDescription(getDescription());
     campaign.setImageUrl(getImageUrl());
-    return campaign;
+    return new UpdateCampaignUseCaseInput(id, name, description, imageUrl);
   }
 }
