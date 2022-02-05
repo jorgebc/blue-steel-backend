@@ -10,11 +10,12 @@ import blue.steel.backend.story.campaign.adapter.dto.SetActualCampaignPayload;
 import blue.steel.backend.story.campaign.adapter.dto.UpdateCampaignInput;
 import blue.steel.backend.story.campaign.adapter.dto.UpdateCampaignPayload;
 import blue.steel.backend.story.campaign.entity.Campaign;
-import blue.steel.backend.story.campaign.usecase.SetActualCampaign;
 import blue.steel.backend.story.campaign.usecase.dto.CreateCampaignUseCaseInput;
 import blue.steel.backend.story.campaign.usecase.dto.CreateCampaignUseCaseOutput;
 import blue.steel.backend.story.campaign.usecase.dto.DeleteCampaignUseCaseInput;
 import blue.steel.backend.story.campaign.usecase.dto.DeleteCampaignUseCaseOutput;
+import blue.steel.backend.story.campaign.usecase.dto.SetActualCampaignUseCaseInput;
+import blue.steel.backend.story.campaign.usecase.dto.SetActualCampaignUseCaseOutput;
 import blue.steel.backend.story.campaign.usecase.dto.UpdateCampaignUseCaseInput;
 import blue.steel.backend.story.campaign.usecase.dto.UpdateCampaignUseCaseOutput;
 import java.util.UUID;
@@ -31,7 +32,8 @@ public class CampaignMutationController {
   private final UseCase<CreateCampaignUseCaseInput, CreateCampaignUseCaseOutput> createCampaign;
   private final UseCase<UpdateCampaignUseCaseInput, UpdateCampaignUseCaseOutput> updateCampaign;
   private final UseCase<DeleteCampaignUseCaseInput, DeleteCampaignUseCaseOutput> deleteCampaign;
-  private final SetActualCampaign setActualCampaign;
+  private final UseCase<SetActualCampaignUseCaseInput, SetActualCampaignUseCaseOutput>
+      setActualCampaign;
 
   /**
    * Constructor.
@@ -45,7 +47,7 @@ public class CampaignMutationController {
       UseCase<CreateCampaignUseCaseInput, CreateCampaignUseCaseOutput> createCampaign,
       UseCase<UpdateCampaignUseCaseInput, UpdateCampaignUseCaseOutput> updateCampaign,
       UseCase<DeleteCampaignUseCaseInput, DeleteCampaignUseCaseOutput> deleteCampaign,
-      SetActualCampaign setActualCampaign) {
+      UseCase<SetActualCampaignUseCaseInput, SetActualCampaignUseCaseOutput> setActualCampaign) {
     this.createCampaign = createCampaign;
     this.updateCampaign = updateCampaign;
     this.deleteCampaign = deleteCampaign;
@@ -105,7 +107,11 @@ public class CampaignMutationController {
   public SetActualCampaignPayload setActualCampaign(
       @Argument @Valid @NotNull SetActualCampaignInput input) {
     UUID campaignId = input.getCampaignId();
-    Campaign actualCampaign = setActualCampaign.setActual(campaignId);
+    SetActualCampaignUseCaseInput setActualCampaignInput =
+        new SetActualCampaignUseCaseInput(campaignId);
+    SetActualCampaignUseCaseOutput setActualCampaignOutput =
+        setActualCampaign.execute(setActualCampaignInput);
+    Campaign actualCampaign = setActualCampaignOutput.getActualCampaign();
     return new SetActualCampaignPayload(actualCampaign);
   }
 }

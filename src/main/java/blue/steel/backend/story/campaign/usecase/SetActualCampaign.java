@@ -1,7 +1,10 @@
 package blue.steel.backend.story.campaign.usecase;
 
+import blue.steel.backend.core.usecase.UseCase;
 import blue.steel.backend.story.campaign.entity.Campaign;
 import blue.steel.backend.story.campaign.entity.CampaignRepository;
+import blue.steel.backend.story.campaign.usecase.dto.SetActualCampaignUseCaseInput;
+import blue.steel.backend.story.campaign.usecase.dto.SetActualCampaignUseCaseOutput;
 import java.util.UUID;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
@@ -10,7 +13,8 @@ import org.springframework.stereotype.Service;
 /** Set actual campaign use case. */
 @Service
 @Transactional
-public class SetActualCampaign {
+public class SetActualCampaign
+    implements UseCase<SetActualCampaignUseCaseInput, SetActualCampaignUseCaseOutput> {
 
   private final CampaignRepository campaignRepository;
 
@@ -21,11 +25,13 @@ public class SetActualCampaign {
   /**
    * Set a campaign to be the actual, updates previous actual campaign if exists.
    *
-   * @param campaignId campaign id
+   * @param input campaign id
    * @return the actual campaign
    */
-  public Campaign setActual(UUID campaignId) {
+  @Override
+  public SetActualCampaignUseCaseOutput execute(SetActualCampaignUseCaseInput input) {
 
+    UUID campaignId = input.getCampaignId();
     Campaign campaign =
         campaignRepository.findById(campaignId).orElseThrow(EntityNotFoundException::new);
 
@@ -39,6 +45,7 @@ public class SetActualCampaign {
 
     campaign.setActual(true);
 
-    return campaignRepository.save(campaign);
+    Campaign actualCampaign = campaignRepository.save(campaign);
+    return new SetActualCampaignUseCaseOutput(actualCampaign);
   }
 }
