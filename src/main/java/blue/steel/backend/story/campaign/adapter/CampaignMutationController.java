@@ -15,6 +15,8 @@ import blue.steel.backend.story.campaign.usecase.SetActualCampaign;
 import blue.steel.backend.story.campaign.usecase.UpdateCampaign;
 import blue.steel.backend.story.campaign.usecase.dto.CreateCampaignUseCaseInput;
 import blue.steel.backend.story.campaign.usecase.dto.CreateCampaignUseCaseOutput;
+import blue.steel.backend.story.campaign.usecase.dto.DeleteCampaignUseCaseInput;
+import blue.steel.backend.story.campaign.usecase.dto.DeleteCampaignUseCaseOutput;
 import java.util.UUID;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -28,7 +30,7 @@ public class CampaignMutationController {
 
   private final UseCase<CreateCampaignUseCaseInput, CreateCampaignUseCaseOutput> createCampaign;
   private final UpdateCampaign updateCampaign;
-  private final DeleteCampaign deleteCampaign;
+  private final UseCase<DeleteCampaignUseCaseInput, DeleteCampaignUseCaseOutput> deleteCampaign;
   private final SetActualCampaign setActualCampaign;
 
   /**
@@ -87,7 +89,9 @@ public class CampaignMutationController {
   @MutationMapping
   public DeleteCampaignPayload deleteCampaign(@Argument @Valid @NotNull DeleteCampaignInput input) {
     UUID campaignId = input.getCampaignId();
-    UUID deletedCampaignId = deleteCampaign.delete(campaignId);
+    DeleteCampaignUseCaseInput deleteCampaignInput = new DeleteCampaignUseCaseInput(campaignId);
+    DeleteCampaignUseCaseOutput deletedCampaignOutput = deleteCampaign.execute(deleteCampaignInput);
+    UUID deletedCampaignId = deletedCampaignOutput.getDeletedCampaignId();
     return new DeleteCampaignPayload(deletedCampaignId);
   }
 
