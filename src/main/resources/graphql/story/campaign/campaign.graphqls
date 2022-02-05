@@ -1,0 +1,74 @@
+type Query {
+    getCampaigns: GetCampaignsPayload!
+    getCampaign(input: GetCampaignInput!): GetCampaignPayload!
+    getActualCampaign: GetActualCampaignPayload!
+}
+
+type Mutation {
+    createCampaign(input: CreateCampaignInput!): CreateCampaignPayload!
+    updateCampaign(input: UpdateCampaignInput!): UpdateCampaignPayload!
+    deleteCampaign(input: DeleteCampaignInput!): DeleteCampaignPayload!
+    setActualCampaign(input: SetActualCampaignInput!): SetActualCampaignPayload!
+}
+
+type Campaign {
+    id: ID!
+    name: String!
+    description: String!
+    imageUrl: String!
+    actual: Boolean!
+}
+
+type GetCampaignsPayload {
+    campaigns: [Campaign]
+}
+
+input GetCampaignInput {
+    campaignId: ID!
+}
+
+type GetActualCampaignPayload {
+    campaign: Campaign!
+}
+
+type GetCampaignPayload {
+    campaign: Campaign!
+}
+
+input CreateCampaignInput {
+    name: String!
+    description: String!
+    imageUrl: String!
+}
+
+type CreateCampaignPayload {
+    campaign: Campaign!
+}
+
+input UpdateCampaignInput {
+    id: ID!
+    name: String!
+    description: String!
+    imageUrl: String!
+}
+
+type UpdateCampaignPayload {
+    campaign: Campaign!
+}
+
+input DeleteCampaignInput {
+    campaignId: ID!
+}
+
+type DeleteCampaignPayload {
+    campaignId: ID!
+}
+
+input SetActualCampaignInput {
+    campaignId: ID!
+}
+
+type SetActualCampaignPayload {
+    campaign: Campaign!
+}
+

@@ -1,0 +1,10 @@
+query GetCampaign($input: GetCampaignInput!) {
+    getCampaign(input: $input) {
+        campaign {
+            id
+            name
+            description
+            imageUrl
+        }
+    }
+}

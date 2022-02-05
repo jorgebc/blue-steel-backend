@@ -1,0 +1,10 @@
+mutation UpdateCampaign($input: UpdateCampaignInput!) {
+    updateCampaign(input: $input) {
+        campaign {
+            id
+            name
+            description
+            imageUrl
+        }
+    }
+}

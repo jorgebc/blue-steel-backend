@@ -1,0 +1,10 @@
+query GetCampaigns {
+    getCampaigns {
+        campaigns {
+            id
+            name
+            description
+            imageUrl
+        }
+    }
+}

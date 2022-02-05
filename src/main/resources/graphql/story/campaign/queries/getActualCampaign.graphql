@@ -1,0 +1,10 @@
+query GetActualCampaign {
+    getActualCampaign {
+        campaign {
+            id
+            name
+            description
+            imageUrl
+        }
+    }
+}

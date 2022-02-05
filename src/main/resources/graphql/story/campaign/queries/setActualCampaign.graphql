@@ -1,0 +1,11 @@
+mutation SetActualCampaign($input: SetActualCampaignInput!) {
+    setActualCampaign(input: $input) {
+        campaign {
+            id
+            name
+            description
+            imageUrl
+            actual
+        }
+    }
+}

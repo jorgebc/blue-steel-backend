@@ -1,0 +1,10 @@
+mutation CreateCampaign($input: CreateCampaignInput!) {
+    createCampaign(input: $input) {
+        campaign {
+            id
+            name
+            description
+            imageUrl
+        }
+    }
+}
