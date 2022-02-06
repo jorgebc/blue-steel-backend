@@ -5,6 +5,12 @@ query GetActualCampaign {
             name
             description
             imageUrl
+            auditingMetadata {
+                createdBy
+                lastModifiedBy
+                creationDate
+                lastModifiedDate
+            }
         }
     }
 }

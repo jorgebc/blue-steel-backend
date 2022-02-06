@@ -5,6 +5,12 @@ query GetCampaigns {
             name
             description
             imageUrl
+            auditingMetadata {
+                createdBy
+                lastModifiedBy
+                creationDate
+                lastModifiedDate
+            }
         }
     }
 }

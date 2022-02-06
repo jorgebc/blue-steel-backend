@@ -11,12 +11,20 @@ type Mutation {
     setActualCampaign(input: SetActualCampaignInput!): SetActualCampaignPayload!
 }
 
+type AuditMetadata {
+    createdBy: String!
+    lastModifiedBy: String!
+    creationDate: String!
+    lastModifiedDate: String!
+}
+
 type Campaign {
     id: ID!
     name: String!
     description: String!
     imageUrl: String!
     actual: Boolean!
+    auditingMetadata: AuditMetadata!
 }
 
 type GetCampaignsPayload {
