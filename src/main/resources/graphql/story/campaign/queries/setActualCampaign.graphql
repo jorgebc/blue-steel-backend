@@ -6,6 +6,12 @@ mutation SetActualCampaign($input: SetActualCampaignInput!) {
             description
             imageUrl
             actual
+            auditingMetadata {
+                createdBy
+                lastModifiedBy
+                creationDate
+                lastModifiedDate
+            }
         }
     }
 }

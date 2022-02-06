@@ -5,6 +5,12 @@ query GetCampaign($input: GetCampaignInput!) {
             name
             description
             imageUrl
+            auditingMetadata {
+                createdBy
+                lastModifiedBy
+                creationDate
+                lastModifiedDate
+            }
         }
     }
 }
