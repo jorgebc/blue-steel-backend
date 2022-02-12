@@ -7,8 +7,14 @@ mutation SetActualCampaign($input: SetActualCampaignInput!) {
             imageUrl
             actual
             auditingMetadata {
-                createdBy
-                lastModifiedBy
+                createdBy {
+                    id
+                    userName
+                }
+                lastModifiedBy {
+                    id
+                    userName
+                }
                 creationDate
                 lastModifiedDate
             }

@@ -2,25 +2,20 @@ package blue.steel.backend.story.campaign.integration;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import blue.steel.backend.UseCaseTest;
 import blue.steel.backend.story.campaign.adapter.dto.CreateCampaignInput;
 import blue.steel.backend.story.campaign.entity.Campaign;
 import java.util.Arrays;
-import javax.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.graphql.tester.AutoConfigureWebGraphQlTester;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.graphql.execution.ErrorType;
 import org.springframework.graphql.test.tester.WebGraphQlTester;
 
 /** Create campaign use case tests. */
-@SpringBootTest
-@AutoConfigureWebGraphQlTester
-@Transactional
-class CreateCampaignUseCaseTest {
+class CreateCampaignUseCaseTest extends UseCaseTest {
 
-  public static final String CREATE_CAMPAIGN_QUERY = "story/campaign/queries/createCampaign";
+  private static final String CREATE_CAMPAIGN_QUERY = "story/campaign/queries/createCampaign";
 
   @Autowired private WebGraphQlTester graphQlTester;
 
@@ -30,10 +25,13 @@ class CreateCampaignUseCaseTest {
     // Given a valid create campaign input
     CreateCampaignInput createCampaignInput =
         new CreateCampaignInput("name", "description", "imageUrl");
+    // And a valid token
+    mockJwtDecoderDecode();
 
     // When creating a campaign
     graphQlTester
         .queryName(CREATE_CAMPAIGN_QUERY)
+        .httpHeaders(headers -> headers.setBearerAuth(TOKEN))
         .variable("input", createCampaignInput)
         .execute()
         .path("createCampaign.campaign")

@@ -11,9 +11,14 @@ type Mutation {
     setActualCampaign(input: SetActualCampaignInput!): SetActualCampaignPayload!
 }
 
+type User {
+    id: String!
+    userName: String!
+}
+
 type AuditMetadata {
-    createdBy: String!
-    lastModifiedBy: String!
+    createdBy: User!
+    lastModifiedBy: User!
     creationDate: String!
     lastModifiedDate: String!
 }
