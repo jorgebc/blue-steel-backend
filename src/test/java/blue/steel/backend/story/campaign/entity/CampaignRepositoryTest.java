@@ -1,5 +1,6 @@
 package blue.steel.backend.story.campaign.entity;
 
+import blue.steel.backend.WithMockAdminUser;
 import java.util.Optional;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -9,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 /** Campaign repository tests. */
 @DataJpaTest
+@WithMockAdminUser
 public class CampaignRepositoryTest {
 
   @Autowired private CampaignRepository campaignRepository;

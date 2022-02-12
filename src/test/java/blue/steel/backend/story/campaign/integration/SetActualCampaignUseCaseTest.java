@@ -2,30 +2,23 @@ package blue.steel.backend.story.campaign.integration;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import blue.steel.backend.UseCaseTest;
 import blue.steel.backend.story.campaign.adapter.dto.SetActualCampaignInput;
 import blue.steel.backend.story.campaign.entity.Campaign;
 import blue.steel.backend.story.campaign.entity.CampaignRepository;
 import blue.steel.backend.story.campaign.entity.CampaignRepositoryTest;
 import java.util.UUID;
-import javax.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.graphql.tester.AutoConfigureWebGraphQlTester;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.graphql.execution.ErrorType;
-import org.springframework.graphql.test.tester.WebGraphQlTester;
 
 /** Set actual campaign use case tests. */
-@SpringBootTest
-@AutoConfigureWebGraphQlTester
-@Transactional
-class SetActualCampaignUseCaseTest {
+class SetActualCampaignUseCaseTest extends UseCaseTest {
 
   private static final String SET_ACTUAL_CAMPAIGN_QUERY =
       "story/campaign/queries/setActualCampaign";
 
-  @Autowired private WebGraphQlTester graphQlTester;
   @Autowired private CampaignRepository campaignRepository;
 
   @Test
@@ -41,8 +34,7 @@ class SetActualCampaignUseCaseTest {
     SetActualCampaignInput input = new SetActualCampaignInput(campaignId);
 
     // When setting the campaign to be the actual
-    graphQlTester
-        .queryName(SET_ACTUAL_CAMPAIGN_QUERY)
+    getGraphQlTesterWithAdminJwtToken(SET_ACTUAL_CAMPAIGN_QUERY)
         .variable("input", input)
         .execute()
         .errors()
@@ -64,8 +56,7 @@ class SetActualCampaignUseCaseTest {
     SetActualCampaignInput input = new SetActualCampaignInput(campaignId);
 
     // When setting the campaign to be the actual
-    graphQlTester
-        .queryName(SET_ACTUAL_CAMPAIGN_QUERY)
+    getGraphQlTesterWithAdminJwtToken(SET_ACTUAL_CAMPAIGN_QUERY)
         .variable("input", input)
         .execute()
         .path("setActualCampaign.campaign")
@@ -91,8 +82,7 @@ class SetActualCampaignUseCaseTest {
     SetActualCampaignInput input = new SetActualCampaignInput(campaignId);
 
     // When setting the campaign to be the actual
-    graphQlTester
-        .queryName(SET_ACTUAL_CAMPAIGN_QUERY)
+    getGraphQlTesterWithAdminJwtToken(SET_ACTUAL_CAMPAIGN_QUERY)
         .variable("input", input)
         .execute()
         .path("setActualCampaign.campaign")

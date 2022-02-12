@@ -2,30 +2,23 @@ package blue.steel.backend.story.campaign.integration;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import blue.steel.backend.UseCaseTest;
 import blue.steel.backend.story.campaign.adapter.dto.UpdateCampaignInput;
 import blue.steel.backend.story.campaign.entity.Campaign;
 import blue.steel.backend.story.campaign.entity.CampaignRepository;
 import blue.steel.backend.story.campaign.entity.CampaignRepositoryTest;
 import java.util.Arrays;
 import java.util.UUID;
-import javax.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.graphql.tester.AutoConfigureWebGraphQlTester;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.graphql.execution.ErrorType;
-import org.springframework.graphql.test.tester.WebGraphQlTester;
 
 /** Update campaign use case tests. */
-@SpringBootTest
-@AutoConfigureWebGraphQlTester
-@Transactional
-public class UpdateCampaignUseCaseTest {
+class UpdateCampaignUseCaseTest extends UseCaseTest {
 
   private static final String UPDATE_CAMPAIGN_QUERY = "story/campaign/queries/updateCampaign";
 
-  @Autowired private WebGraphQlTester graphQlTester;
   @Autowired private CampaignRepository campaignRepository;
 
   @Test
@@ -41,8 +34,7 @@ public class UpdateCampaignUseCaseTest {
         new UpdateCampaignInput(id, "new name", "new description", "new imageUrl");
 
     // When updating a campaign
-    graphQlTester
-        .queryName(UPDATE_CAMPAIGN_QUERY)
+    getGraphQlTesterWithAdminJwtToken(UPDATE_CAMPAIGN_QUERY)
         .variable("input", createCampaignInput)
         .execute()
         .path("updateCampaign.campaign")
@@ -62,8 +54,7 @@ public class UpdateCampaignUseCaseTest {
         new UpdateCampaignInput(UUID.randomUUID(), "new name", "new description", "new imageUrl");
 
     // When updating a campaign
-    graphQlTester
-        .queryName(UPDATE_CAMPAIGN_QUERY)
+    getGraphQlTesterWithAdminJwtToken(UPDATE_CAMPAIGN_QUERY)
         .variable("input", createCampaignInput)
         .execute()
         .errors()
@@ -82,8 +73,7 @@ public class UpdateCampaignUseCaseTest {
     String[] campaignFieldNamesWithErrors = {"name", "description", "imageUrl"};
 
     // When updating a campaign
-    graphQlTester
-        .queryName(UPDATE_CAMPAIGN_QUERY)
+    getGraphQlTesterWithAdminJwtToken(UPDATE_CAMPAIGN_QUERY)
         .variable("input", updateCampaignInput)
         .execute()
         .errors()

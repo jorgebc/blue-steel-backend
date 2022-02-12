@@ -8,16 +8,12 @@ import blue.steel.backend.story.campaign.entity.Campaign;
 import java.util.Arrays;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.execution.ErrorType;
-import org.springframework.graphql.test.tester.WebGraphQlTester;
 
 /** Create campaign use case tests. */
 class CreateCampaignUseCaseTest extends UseCaseTest {
 
   private static final String CREATE_CAMPAIGN_QUERY = "story/campaign/queries/createCampaign";
-
-  @Autowired private WebGraphQlTester graphQlTester;
 
   @Test
   @DisplayName("Creating a valid campaign should return a not null campaign")
@@ -25,13 +21,9 @@ class CreateCampaignUseCaseTest extends UseCaseTest {
     // Given a valid create campaign input
     CreateCampaignInput createCampaignInput =
         new CreateCampaignInput("name", "description", "imageUrl");
-    // And a valid token
-    mockJwtDecoderDecode();
 
     // When creating a campaign
-    graphQlTester
-        .queryName(CREATE_CAMPAIGN_QUERY)
-        .httpHeaders(headers -> headers.setBearerAuth(TOKEN))
+    getGraphQlTesterWithAdminJwtToken(CREATE_CAMPAIGN_QUERY)
         .variable("input", createCampaignInput)
         .execute()
         .path("createCampaign.campaign")
@@ -49,8 +41,7 @@ class CreateCampaignUseCaseTest extends UseCaseTest {
     String[] campaignFieldNamesWithErrors = {"name", "description", "imageUrl"};
 
     // When creating a campaign
-    graphQlTester
-        .queryName(CREATE_CAMPAIGN_QUERY)
+    getGraphQlTesterWithAdminJwtToken(CREATE_CAMPAIGN_QUERY)
         .variable("input", createCampaignInput)
         .execute()
         .errors()

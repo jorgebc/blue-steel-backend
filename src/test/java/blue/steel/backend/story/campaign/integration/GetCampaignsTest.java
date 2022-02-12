@@ -1,24 +1,17 @@
 package blue.steel.backend.story.campaign.integration;
 
+import blue.steel.backend.UseCaseTest;
 import blue.steel.backend.story.campaign.entity.Campaign;
 import blue.steel.backend.story.campaign.entity.CampaignRepository;
 import blue.steel.backend.story.campaign.entity.CampaignRepositoryTest;
-import javax.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.graphql.tester.AutoConfigureWebGraphQlTester;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.graphql.test.tester.WebGraphQlTester;
 
-@SpringBootTest
-@AutoConfigureWebGraphQlTester
-@Transactional
-class GetCampaignsTest {
+class GetCampaignsTest extends UseCaseTest {
 
   public static final String GET_CAMPAIGNS_QUERY = "story/campaign/queries/getCampaigns";
 
-  @Autowired private WebGraphQlTester graphQlTester;
   @Autowired private CampaignRepository campaignRepository;
 
   @Test
@@ -29,8 +22,7 @@ class GetCampaignsTest {
     campaignRepository.save(campaign);
 
     // When fetching all campaigns
-    this.graphQlTester
-        .queryName(GET_CAMPAIGNS_QUERY)
+    getGraphQlTesterWithAdminJwtToken(GET_CAMPAIGNS_QUERY)
         .execute()
         .path("getCampaigns.campaigns[*]")
         .entityList(Campaign.class)
@@ -45,8 +37,7 @@ class GetCampaignsTest {
     // Given no campaign
 
     // When fetching for a campaign
-    this.graphQlTester
-        .queryName(GET_CAMPAIGNS_QUERY)
+    getGraphQlTesterWithAdminJwtToken(GET_CAMPAIGNS_QUERY)
         .execute()
         .path("getCampaigns.campaigns[*]")
         .entityList(Campaign.class)

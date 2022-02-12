@@ -11,7 +11,9 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Component;
 
 @Component
-class SpringSecurityAuditorAware implements AuditorAware<User> {
+public class SpringSecurityAuditorAware implements AuditorAware<User> {
+
+  public static String USER_NAME_CLAIM = "https://blue-steel.com/username";
 
   @Autowired private UserRepository userRepository;
 
@@ -23,7 +25,7 @@ class SpringSecurityAuditorAware implements AuditorAware<User> {
     String id = authentication.getName();
 
     Jwt principal = (Jwt) authentication.getPrincipal();
-    String username = principal.getClaim("https://blue-steel.com/username");
+    String username = principal.getClaim(USER_NAME_CLAIM);
 
     User newUser = new User();
     newUser.setId(id);
