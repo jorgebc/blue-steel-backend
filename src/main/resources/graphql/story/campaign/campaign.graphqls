@@ -1,26 +1,14 @@
-type Query {
+extend type Query {
     getCampaigns: GetCampaignsPayload!
     getCampaign(input: GetCampaignInput!): GetCampaignPayload!
     getActualCampaign: GetActualCampaignPayload!
 }
 
-type Mutation {
+extend type Mutation {
     createCampaign(input: CreateCampaignInput!): CreateCampaignPayload!
     updateCampaign(input: UpdateCampaignInput!): UpdateCampaignPayload!
     deleteCampaign(input: DeleteCampaignInput!): DeleteCampaignPayload!
     setActualCampaign(input: SetActualCampaignInput!): SetActualCampaignPayload!
-}
-
-type User {
-    id: String!
-    userName: String!
-}
-
-type AuditMetadata {
-    createdBy: User!
-    lastModifiedBy: User!
-    creationDate: String!
-    lastModifiedDate: String!
 }
 
 type Campaign {

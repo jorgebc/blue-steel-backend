@@ -1,0 +1,19 @@
+type Query {
+
+}
+
+type Mutation {
+
+}
+
+type User {
+    id: String!
+    userName: String!
+}
+
+type AuditMetadata {
+    createdBy: User!
+    lastModifiedBy: User!
+    creationDate: String!
+    lastModifiedDate: String!
+}

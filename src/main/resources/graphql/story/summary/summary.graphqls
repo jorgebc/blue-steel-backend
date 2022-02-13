@@ -1,0 +1,32 @@
+extend type Query {
+    getSummary: GetSummaryPayload!
+}
+
+extend type Mutation {
+    createCampaignSummary(input: CreateCampaignSummaryInput!): CreateCampaignSummaryPayload!
+}
+
+type Summary {
+    id: ID!
+    name: String!
+    description: String!
+    gameDate:String!
+    campaign: Campaign!
+    auditingMetadata: AuditMetadata!
+    version: Float!
+}
+
+type GetSummaryPayload {
+    summary: Summary!
+}
+
+input CreateCampaignSummaryInput {
+    campaignId: ID!
+    name: String!
+    description: String!
+    gameDate:String!
+}
+
+type CreateCampaignSummaryPayload {
+    summary: Summary!
+}

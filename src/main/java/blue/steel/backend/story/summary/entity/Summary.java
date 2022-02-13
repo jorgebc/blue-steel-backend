@@ -1,30 +1,33 @@
-package blue.steel.backend.story.campaign.entity;
+package blue.steel.backend.story.summary.entity;
 
 import blue.steel.backend.core.entity.AuditMetadata;
 import blue.steel.backend.core.entity.Versionable;
-import blue.steel.backend.story.summary.entity.Summary;
-import java.util.Collection;
+import blue.steel.backend.story.campaign.entity.Campaign;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.time.LocalDate;
 import java.util.UUID;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.format.annotation.DateTimeFormat;
 
-/** Campaign JPA entity. */
+/** Campaign summary JPA entity. */
 @Entity
 @Getter
 @Setter
 @EntityListeners(AuditingEntityListener.class)
-public class Campaign implements Versionable {
+public class Summary implements Versionable {
 
   @Version private Integer version;
 
@@ -39,13 +42,14 @@ public class Campaign implements Versionable {
   @Column(columnDefinition = "TEXT")
   private String description;
 
-  @NotNull private String imageUrl;
-  private boolean actual;
+  @NotNull
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+  @JsonFormat(pattern = "yyyy-MM-dd")
+  private LocalDate gameDate;
 
-  @OneToMany(
-      mappedBy = "campaign",
-      cascade = {CascadeType.ALL})
-  private Collection<Summary> summaries;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "campaign_id")
+  private Campaign campaign;
 
   @Embedded private AuditMetadata auditingMetadata = new AuditMetadata();
 }

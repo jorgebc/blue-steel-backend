@@ -13,9 +13,9 @@ public class CampaignRepositoryTest extends IntegrationTest {
   @Autowired private CampaignRepository campaignRepository;
 
   /**
-   * Creates a Campaign, no id set and actual to false.
+   * Creates a campaign, no id set and actual to false.
    *
-   * @return Campaign
+   * @return a new campaign
    */
   public static Campaign createCampaign() {
     Campaign campaign = new Campaign();
