@@ -2,6 +2,7 @@ package blue.steel.backend.core.config;
 
 import graphql.GraphqlErrorBuilder;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.OptimisticLockException;
 import javax.validation.ConstraintViolationException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,6 +45,11 @@ public class ExceptionResolverConfig {
             return GraphqlErrorBuilder.newError(env)
                 .message(ex.getMessage())
                 .errorType(ErrorType.FORBIDDEN)
+                .build();
+          } else if (ex instanceof OptimisticLockException) {
+            return GraphqlErrorBuilder.newError(env)
+                .message(ex.getMessage())
+                .errorType(ErrorType.BAD_REQUEST)
                 .build();
           } else {
             return null;

@@ -17,6 +17,7 @@ mutation CreateCampaign($input: CreateCampaignInput!) {
                 creationDate
                 lastModifiedDate
             }
+            version
         }
     }
 }

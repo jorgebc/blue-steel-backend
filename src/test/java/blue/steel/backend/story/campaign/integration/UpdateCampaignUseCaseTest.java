@@ -30,8 +30,9 @@ class UpdateCampaignUseCaseTest extends IntegrationTest {
 
     // And a valid update campaign input
     UUID id = campaign.getId();
+    Integer version = campaign.getVersion();
     UpdateCampaignInput createCampaignInput =
-        new UpdateCampaignInput(id, "new name", "new description", "new imageUrl");
+        new UpdateCampaignInput(id, "new name", "new description", "new imageUrl", version);
 
     // When updating a campaign
     getGraphQlTesterWithAdminJwtToken(UPDATE_CAMPAIGN_QUERY)
@@ -51,7 +52,8 @@ class UpdateCampaignUseCaseTest extends IntegrationTest {
 
     // And a valid update campaign input
     UpdateCampaignInput createCampaignInput =
-        new UpdateCampaignInput(UUID.randomUUID(), "new name", "new description", "new imageUrl");
+        new UpdateCampaignInput(
+            UUID.randomUUID(), "new name", "new description", "new imageUrl", 0);
 
     // When updating a campaign
     getGraphQlTesterWithAdminJwtToken(UPDATE_CAMPAIGN_QUERY)
@@ -69,7 +71,7 @@ class UpdateCampaignUseCaseTest extends IntegrationTest {
   void updateInvalidCampaign() {
     // Given an invalid update campaign input
     UpdateCampaignInput updateCampaignInput =
-        new UpdateCampaignInput(UUID.randomUUID(), "", "", "");
+        new UpdateCampaignInput(UUID.randomUUID(), "", "", "", 0);
     String[] campaignFieldNamesWithErrors = {"name", "description", "imageUrl"};
 
     // When updating a campaign
@@ -84,6 +86,29 @@ class UpdateCampaignUseCaseTest extends IntegrationTest {
                 graphQLError.getErrorType().equals(ErrorType.BAD_REQUEST)
                     && Arrays.stream(campaignFieldNamesWithErrors)
                         .allMatch(graphQLError.getMessage()::contains))
+        .verify();
+  }
+
+  @Test
+  @DisplayName("Updating a campaign with invalid version should return bad request error")
+  void updateValidCampaignWithInvalidVersion() {
+    // Given an existing campaign
+    Campaign campaign = CampaignRepositoryTest.createCampaign();
+    campaign = campaignRepository.save(campaign);
+
+    // And a valid update campaign input with incorrect version
+    UUID id = campaign.getId();
+    UpdateCampaignInput createCampaignInput =
+        new UpdateCampaignInput(id, "new name", "new description", "new imageUrl", 4);
+
+    // When updating a campaign
+    getGraphQlTesterWithAdminJwtToken(UPDATE_CAMPAIGN_QUERY)
+        .variable("input", createCampaignInput)
+        .execute()
+        .errors()
+
+        // Then error response should contain a bad request error
+        .expect(graphQLError -> graphQLError.getErrorType().equals(ErrorType.BAD_REQUEST))
         .verify();
   }
 }

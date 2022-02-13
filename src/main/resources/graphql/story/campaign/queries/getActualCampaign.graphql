@@ -17,6 +17,7 @@ query GetActualCampaign {
                 creationDate
                 lastModifiedDate
             }
+            version
         }
     }
 }
