@@ -14,7 +14,7 @@ public class WithMockAdminUserSecurityContextFactory
   public SecurityContext createSecurityContext(WithMockAdminUser annotation) {
     SecurityContext context = SecurityContextHolder.createEmptyContext();
 
-    Jwt jwt = UseCaseTest.getAdminJwt();
+    Jwt jwt = IntegrationTest.getAdminJwt();
     Authentication auth = new JwtAuthenticationToken(jwt);
     context.setAuthentication(auth);
     return context;

@@ -10,10 +10,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Component;
 
+/**
+ * Extracts auditor data from db if user exists, else extracts data from authentication and saves a
+ * new user.
+ */
 @Component
 public class SpringSecurityAuditorAware implements AuditorAware<User> {
 
-  public static String USER_NAME_CLAIM = "https://blue-steel.com/username";
+  public static final String USER_NAME_CLAIM = "https://blue-steel.com/username";
 
   @Autowired private UserRepository userRepository;
 

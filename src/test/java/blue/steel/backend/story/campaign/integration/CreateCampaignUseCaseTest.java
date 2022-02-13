@@ -2,7 +2,7 @@ package blue.steel.backend.story.campaign.integration;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import blue.steel.backend.UseCaseTest;
+import blue.steel.backend.IntegrationTest;
 import blue.steel.backend.story.campaign.adapter.dto.CreateCampaignInput;
 import blue.steel.backend.story.campaign.entity.Campaign;
 import java.util.Arrays;
@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.graphql.execution.ErrorType;
 
 /** Create campaign use case tests. */
-class CreateCampaignUseCaseTest extends UseCaseTest {
+class CreateCampaignUseCaseTest extends IntegrationTest {
 
   private static final String CREATE_CAMPAIGN_QUERY = "story/campaign/queries/createCampaign";
 

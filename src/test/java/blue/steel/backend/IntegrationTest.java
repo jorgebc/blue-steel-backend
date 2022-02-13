@@ -17,7 +17,7 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 @AutoConfigureWebGraphQlTester
 @Transactional
 @WithMockAdminUser
-public abstract class UseCaseTest {
+public abstract class IntegrationTest {
 
   protected static final String VALID_JWT_TOKEN = "token";
   protected static final String ADMIN_USER_ID = "auth0|id";
@@ -26,14 +26,17 @@ public abstract class UseCaseTest {
   @Autowired protected WebGraphQlTester graphQlTester;
   @MockBean private JwtDecoder jwtDecoder;
 
+  /**
+   * Creates an admin Jwt token.
+   *
+   * @return admin token
+   */
   public static Jwt getAdminJwt() {
-    Jwt jwt =
-        Jwt.withTokenValue(VALID_JWT_TOKEN)
-            .header("header", "header")
-            .claim("sub", ADMIN_USER_ID)
-            .claim(SpringSecurityAuditorAware.USER_NAME_CLAIM, ADMIN_USER_NAME)
-            .build();
-    return jwt;
+    return Jwt.withTokenValue(VALID_JWT_TOKEN)
+        .subject(ADMIN_USER_ID)
+        .header("header", "header")
+        .claim(SpringSecurityAuditorAware.USER_NAME_CLAIM, ADMIN_USER_NAME)
+        .build();
   }
 
   protected WebGraphQlTester.WebRequestSpec getGraphQlTesterWithAdminJwtToken(String queryName) {

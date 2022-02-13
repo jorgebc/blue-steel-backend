@@ -2,7 +2,7 @@ package blue.steel.backend.story.campaign.integration;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import blue.steel.backend.UseCaseTest;
+import blue.steel.backend.IntegrationTest;
 import blue.steel.backend.story.campaign.adapter.dto.SetActualCampaignInput;
 import blue.steel.backend.story.campaign.entity.Campaign;
 import blue.steel.backend.story.campaign.entity.CampaignRepository;
@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.execution.ErrorType;
 
 /** Set actual campaign use case tests. */
-class SetActualCampaignUseCaseTest extends UseCaseTest {
+class SetActualCampaignUseCaseTest extends IntegrationTest {
 
   private static final String SET_ACTUAL_CAMPAIGN_QUERY =
       "story/campaign/queries/setActualCampaign";

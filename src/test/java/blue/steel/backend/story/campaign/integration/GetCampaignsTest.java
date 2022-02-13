@@ -1,6 +1,6 @@
 package blue.steel.backend.story.campaign.integration;
 
-import blue.steel.backend.UseCaseTest;
+import blue.steel.backend.IntegrationTest;
 import blue.steel.backend.story.campaign.entity.Campaign;
 import blue.steel.backend.story.campaign.entity.CampaignRepository;
 import blue.steel.backend.story.campaign.entity.CampaignRepositoryTest;
@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-class GetCampaignsTest extends UseCaseTest {
+class GetCampaignsTest extends IntegrationTest {
 
   public static final String GET_CAMPAIGNS_QUERY = "story/campaign/queries/getCampaigns";
 
