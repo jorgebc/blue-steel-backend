@@ -30,6 +30,7 @@ type Campaign {
     imageUrl: String!
     actual: Boolean!
     auditingMetadata: AuditMetadata!
+    version: Float!
 }
 
 type GetCampaignsPayload {
@@ -63,6 +64,7 @@ input UpdateCampaignInput {
     name: String!
     description: String!
     imageUrl: String!
+    version: Float!
 }
 
 type UpdateCampaignPayload {

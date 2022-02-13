@@ -1,5 +1,6 @@
 package blue.steel.backend.story.campaign.usecase;
 
+import blue.steel.backend.core.usecase.EntityUtils;
 import blue.steel.backend.core.usecase.UseCase;
 import blue.steel.backend.story.campaign.entity.Campaign;
 import blue.steel.backend.story.campaign.entity.CampaignRepository;
@@ -30,13 +31,11 @@ public class UpdateCampaign
    */
   @Override
   public UpdateCampaignUseCaseOutput execute(UpdateCampaignUseCaseInput input) {
+
     UUID id = input.getCampaignId();
     Campaign campaign = campaignRepository.findById(id).orElseThrow(EntityNotFoundException::new);
 
-    campaign.setName(input.getName());
-    campaign.setDescription(input.getDescription());
-    campaign.setImageUrl(input.getImageUrl());
-
+    EntityUtils.copyVersionableEntityProperties(input, campaign);
     campaign = campaignRepository.save(campaign);
 
     return new UpdateCampaignUseCaseOutput(campaign);

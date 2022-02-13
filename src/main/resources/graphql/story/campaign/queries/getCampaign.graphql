@@ -17,6 +17,7 @@ query GetCampaign($input: GetCampaignInput!) {
                 creationDate
                 lastModifiedDate
             }
+            version
         }
     }
 }

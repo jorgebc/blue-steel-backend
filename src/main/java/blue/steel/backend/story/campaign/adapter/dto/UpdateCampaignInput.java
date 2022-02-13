@@ -19,6 +19,8 @@ public class UpdateCampaignInput {
 
   @NotEmpty String imageUrl;
 
+  @NotNull Integer version;
+
   /**
    * Maps the data to a new update campaign use case input.
    *
@@ -30,6 +32,6 @@ public class UpdateCampaignInput {
     campaign.setName(getName());
     campaign.setDescription(getDescription());
     campaign.setImageUrl(getImageUrl());
-    return new UpdateCampaignUseCaseInput(id, name, description, imageUrl);
+    return new UpdateCampaignUseCaseInput(id, name, description, imageUrl, version);
   }
 }
