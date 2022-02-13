@@ -2,27 +2,18 @@ package blue.steel.backend.story.campaign.integration;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import blue.steel.backend.IntegrationTest;
 import blue.steel.backend.story.campaign.adapter.dto.CreateCampaignInput;
 import blue.steel.backend.story.campaign.entity.Campaign;
 import java.util.Arrays;
-import javax.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.graphql.tester.AutoConfigureWebGraphQlTester;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.graphql.execution.ErrorType;
-import org.springframework.graphql.test.tester.WebGraphQlTester;
 
 /** Create campaign use case tests. */
-@SpringBootTest
-@AutoConfigureWebGraphQlTester
-@Transactional
-class CreateCampaignUseCaseTest {
+class CreateCampaignUseCaseTest extends IntegrationTest {
 
-  public static final String CREATE_CAMPAIGN_QUERY = "story/campaign/queries/createCampaign";
-
-  @Autowired private WebGraphQlTester graphQlTester;
+  private static final String CREATE_CAMPAIGN_QUERY = "story/campaign/queries/createCampaign";
 
   @Test
   @DisplayName("Creating a valid campaign should return a not null campaign")
@@ -32,8 +23,7 @@ class CreateCampaignUseCaseTest {
         new CreateCampaignInput("name", "description", "imageUrl");
 
     // When creating a campaign
-    graphQlTester
-        .queryName(CREATE_CAMPAIGN_QUERY)
+    getGraphQlTesterWithAdminJwtToken(CREATE_CAMPAIGN_QUERY)
         .variable("input", createCampaignInput)
         .execute()
         .path("createCampaign.campaign")
@@ -51,8 +41,7 @@ class CreateCampaignUseCaseTest {
     String[] campaignFieldNamesWithErrors = {"name", "description", "imageUrl"};
 
     // When creating a campaign
-    graphQlTester
-        .queryName(CREATE_CAMPAIGN_QUERY)
+    getGraphQlTesterWithAdminJwtToken(CREATE_CAMPAIGN_QUERY)
         .variable("input", createCampaignInput)
         .execute()
         .errors()

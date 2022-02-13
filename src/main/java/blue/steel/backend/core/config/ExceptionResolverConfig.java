@@ -9,6 +9,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.graphql.execution.DataFetcherExceptionResolver;
 import org.springframework.graphql.execution.DataFetcherExceptionResolverAdapter;
 import org.springframework.graphql.execution.ErrorType;
+import org.springframework.security.access.AccessDeniedException;
 
 /** Exception resolver configuration. */
 @Configuration
@@ -38,6 +39,11 @@ public class ExceptionResolverConfig {
             return GraphqlErrorBuilder.newError(env)
                 .message(ex.getMessage())
                 .errorType(ErrorType.BAD_REQUEST)
+                .build();
+          } else if (ex instanceof AccessDeniedException) {
+            return GraphqlErrorBuilder.newError(env)
+                .message(ex.getMessage())
+                .errorType(ErrorType.FORBIDDEN)
                 .build();
           } else {
             return null;

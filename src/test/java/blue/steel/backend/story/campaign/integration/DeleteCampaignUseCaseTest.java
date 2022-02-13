@@ -2,31 +2,24 @@ package blue.steel.backend.story.campaign.integration;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import blue.steel.backend.IntegrationTest;
 import blue.steel.backend.story.campaign.adapter.dto.DeleteCampaignInput;
 import blue.steel.backend.story.campaign.entity.Campaign;
 import blue.steel.backend.story.campaign.entity.CampaignRepository;
 import blue.steel.backend.story.campaign.entity.CampaignRepositoryTest;
 import java.util.Arrays;
 import java.util.UUID;
-import javax.transaction.Transactional;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.graphql.tester.AutoConfigureWebGraphQlTester;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.graphql.execution.ErrorType;
-import org.springframework.graphql.test.tester.WebGraphQlTester;
 
 /** Delete campaign use case tests. */
-@SpringBootTest
-@AutoConfigureWebGraphQlTester
-@Transactional
-class DeleteCampaignUseCaseTest {
+class DeleteCampaignUseCaseTest extends IntegrationTest {
 
   private static final String DELETE_CAMPAIGN_QUERY = "story/campaign/queries/deleteCampaign";
 
-  @Autowired private WebGraphQlTester graphQlTester;
   @Autowired private CampaignRepository campaignRepository;
 
   @Test
@@ -41,8 +34,7 @@ class DeleteCampaignUseCaseTest {
     DeleteCampaignInput deleteCampaignInput = new DeleteCampaignInput(id);
 
     // When deleting a campaign
-    graphQlTester
-        .queryName(DELETE_CAMPAIGN_QUERY)
+    getGraphQlTesterWithAdminJwtToken(DELETE_CAMPAIGN_QUERY)
         .variable("input", deleteCampaignInput)
         .execute()
         .path("deleteCampaign.campaignId")
@@ -61,8 +53,7 @@ class DeleteCampaignUseCaseTest {
     DeleteCampaignInput deleteCampaignInput = new DeleteCampaignInput(UUID.randomUUID());
 
     // When deleting a campaign
-    graphQlTester
-        .queryName(DELETE_CAMPAIGN_QUERY)
+    getGraphQlTesterWithAdminJwtToken(DELETE_CAMPAIGN_QUERY)
         .variable("input", deleteCampaignInput)
         .execute()
         .errors()
@@ -81,8 +72,7 @@ class DeleteCampaignUseCaseTest {
     String[] inputFieldNamesWithErrors = {"id"};
 
     // When deleting a campaign
-    graphQlTester
-        .queryName(DELETE_CAMPAIGN_QUERY)
+    getGraphQlTesterWithAdminJwtToken(DELETE_CAMPAIGN_QUERY)
         .variable("input", deleteCampaignInput)
         .execute()
         .errors()
