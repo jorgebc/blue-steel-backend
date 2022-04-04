@@ -1,8 +1,8 @@
 package blue.steel.backend.story.summary.usecase;
 
 import blue.steel.backend.core.usecase.UseCase;
-import blue.steel.backend.story.summary.entity.Summary;
-import blue.steel.backend.story.summary.entity.SummaryRepository;
+import blue.steel.backend.story.summary.persistence.Summary;
+import blue.steel.backend.story.summary.persistence.SummaryRepository;
 import blue.steel.backend.story.summary.usecase.dto.CreateSummaryUseCaseInput;
 import blue.steel.backend.story.summary.usecase.dto.CreateSummaryUseCaseOutput;
 import javax.transaction.Transactional;

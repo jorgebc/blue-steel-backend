@@ -21,12 +21,14 @@ import blue.steel.backend.story.campaign.usecase.dto.UpdateCampaignUseCaseOutput
 import java.util.UUID;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.stereotype.Controller;
 
 /** Campaign mutation controller. */
 @Controller
+@RequiredArgsConstructor
 public class CampaignMutationController {
 
   private final UseCase<CreateCampaignUseCaseInput, CreateCampaignUseCaseOutput> createCampaign;
@@ -34,25 +36,6 @@ public class CampaignMutationController {
   private final UseCase<DeleteCampaignUseCaseInput, DeleteCampaignUseCaseOutput> deleteCampaign;
   private final UseCase<SetActualCampaignUseCaseInput, SetActualCampaignUseCaseOutput>
       setActualCampaign;
-
-  /**
-   * Constructor.
-   *
-   * @param createCampaign create campaign use case
-   * @param updateCampaign update campaign use case
-   * @param deleteCampaign delete campaign use case
-   * @param setActualCampaign set actual campaign use case
-   */
-  public CampaignMutationController(
-      UseCase<CreateCampaignUseCaseInput, CreateCampaignUseCaseOutput> createCampaign,
-      UseCase<UpdateCampaignUseCaseInput, UpdateCampaignUseCaseOutput> updateCampaign,
-      UseCase<DeleteCampaignUseCaseInput, DeleteCampaignUseCaseOutput> deleteCampaign,
-      UseCase<SetActualCampaignUseCaseInput, SetActualCampaignUseCaseOutput> setActualCampaign) {
-    this.createCampaign = createCampaign;
-    this.updateCampaign = updateCampaign;
-    this.deleteCampaign = deleteCampaign;
-    this.setActualCampaign = setActualCampaign;
-  }
 
   /**
    * Creates a new campaign.

@@ -2,8 +2,8 @@ package blue.steel.backend.story.campaign.entity;
 
 import blue.steel.backend.core.entity.AuditMetadata;
 import blue.steel.backend.core.entity.Versionable;
-import blue.steel.backend.story.summary.entity.Summary;
-import java.util.Collection;
+import blue.steel.backend.story.summary.persistence.Summary;
+import java.util.List;
 import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,6 +17,8 @@ import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /** Campaign JPA entity. */
@@ -45,7 +47,8 @@ public class Campaign implements Versionable {
   @OneToMany(
       mappedBy = "campaign",
       cascade = {CascadeType.ALL})
-  private Collection<Summary> summaries;
+  @Fetch(FetchMode.JOIN)
+  private List<Summary> summaries;
 
   @Embedded private AuditMetadata auditingMetadata = new AuditMetadata();
 }

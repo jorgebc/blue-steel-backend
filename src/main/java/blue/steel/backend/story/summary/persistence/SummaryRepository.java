@@ -1,4 +1,4 @@
-package blue.steel.backend.story.summary.entity;
+package blue.steel.backend.story.summary.persistence;
 
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;

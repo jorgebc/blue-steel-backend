@@ -2,7 +2,7 @@ package blue.steel.backend.story.summary.usecase.dto;
 
 import blue.steel.backend.core.usecase.UseCaseInput;
 import blue.steel.backend.story.campaign.entity.Campaign;
-import blue.steel.backend.story.summary.entity.Summary;
+import blue.steel.backend.story.summary.persistence.Summary;
 import java.time.LocalDate;
 import java.util.UUID;
 import lombok.Value;
@@ -10,12 +10,10 @@ import lombok.Value;
 /** Create campaign summary use case input. */
 @Value
 public class CreateSummaryUseCaseInput implements UseCaseInput {
+
   UUID campaignId;
-
   String name;
-
   String description;
-
   LocalDate gameDate;
 
   /**

@@ -4,6 +4,8 @@ import blue.steel.backend.IntegrationTest;
 import blue.steel.backend.story.campaign.entity.Campaign;
 import blue.steel.backend.story.campaign.entity.CampaignRepository;
 import blue.steel.backend.story.campaign.entity.CampaignRepositoryTest;
+import blue.steel.backend.story.summary.persistence.Summary;
+import blue.steel.backend.story.summary.persistence.SummaryRepository;
 import java.time.LocalDate;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

@@ -17,6 +17,7 @@ type Campaign {
     description: String!
     imageUrl: String!
     actual: Boolean!
+    summaries: [Summary]
     auditingMetadata: AuditMetadata!
     version: Float!
 }

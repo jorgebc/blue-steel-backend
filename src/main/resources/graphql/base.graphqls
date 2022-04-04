@@ -1,3 +1,9 @@
+# java.time.LocalDate implementation
+#scalar LocalDate
+
+# java.time.LocalDateTime implementation
+#scalar LocalDateTime
+
 type Query {
 
 }

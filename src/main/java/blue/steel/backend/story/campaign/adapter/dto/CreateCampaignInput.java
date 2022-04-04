@@ -8,10 +8,9 @@ import lombok.Value;
 /** Create campaign input. */
 @Value
 public class CreateCampaignInput {
+
   @NotEmpty String name;
-
   @NotEmpty String description;
-
   @NotEmpty String imageUrl;
 
   /**

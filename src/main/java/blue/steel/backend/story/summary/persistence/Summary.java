@@ -1,9 +1,8 @@
-package blue.steel.backend.story.summary.entity;
+package blue.steel.backend.story.summary.persistence;
 
 import blue.steel.backend.core.entity.AuditMetadata;
 import blue.steel.backend.core.entity.Versionable;
 import blue.steel.backend.story.campaign.entity.Campaign;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDate;
 import java.util.UUID;
 import javax.persistence.Column;
@@ -20,7 +19,6 @@ import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.format.annotation.DateTimeFormat;
 
 /** Campaign summary JPA entity. */
 @Entity
@@ -42,10 +40,7 @@ public class Summary implements Versionable {
   @Column(columnDefinition = "TEXT")
   private String description;
 
-  @NotNull
-  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-  @JsonFormat(pattern = "yyyy-MM-dd")
-  private LocalDate gameDate;
+  @NotNull private LocalDate gameDate;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "campaign_id")

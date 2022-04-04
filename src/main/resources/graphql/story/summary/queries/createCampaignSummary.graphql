@@ -1,0 +1,23 @@
+mutation CreateCampaignSummary($input: CreateCampaignSummaryInput!) {
+    createCampaignSummary(input: $input) {
+        summary {
+            id
+            name
+            description
+            gameDate
+            auditingMetadata {
+                createdBy {
+                    id
+                    userName
+                }
+                lastModifiedBy {
+                    id
+                    userName
+                }
+                creationDate
+                lastModifiedDate
+            }
+            version
+        }
+    }
+}
