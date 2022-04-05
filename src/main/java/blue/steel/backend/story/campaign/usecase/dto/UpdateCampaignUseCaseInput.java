@@ -1,6 +1,6 @@
 package blue.steel.backend.story.campaign.usecase.dto;
 
-import blue.steel.backend.core.entity.Versionable;
+import blue.steel.backend.core.persistence.Versionable;
 import blue.steel.backend.core.usecase.UseCaseInput;
 import java.util.UUID;
 import lombok.Value;

@@ -1,4 +1,4 @@
-package blue.steel.backend.core.entity;
+package blue.steel.backend.core.persistence;
 
 import java.time.LocalDateTime;
 import javax.persistence.Column;
@@ -21,12 +21,12 @@ public class AuditMetadata {
   @ManyToOne
   @JoinColumn(name = "created_by_id")
   @CreatedBy
-  private User createdBy;
+  private Users createdBy;
 
   @ManyToOne
   @JoinColumn(name = "last_modified_by_id")
   @LastModifiedBy
-  private User lastModifiedBy;
+  private Users lastModifiedBy;
 
   @CreatedDate
   @Column(columnDefinition = "TIMESTAMP")

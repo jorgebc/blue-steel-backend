@@ -9,7 +9,7 @@ import blue.steel.backend.story.campaign.adapter.dto.SetActualCampaignInput;
 import blue.steel.backend.story.campaign.adapter.dto.SetActualCampaignPayload;
 import blue.steel.backend.story.campaign.adapter.dto.UpdateCampaignInput;
 import blue.steel.backend.story.campaign.adapter.dto.UpdateCampaignPayload;
-import blue.steel.backend.story.campaign.entity.Campaign;
+import blue.steel.backend.story.campaign.persistence.Campaign;
 import blue.steel.backend.story.campaign.usecase.dto.CreateCampaignUseCaseInput;
 import blue.steel.backend.story.campaign.usecase.dto.CreateCampaignUseCaseOutput;
 import blue.steel.backend.story.campaign.usecase.dto.DeleteCampaignUseCaseInput;

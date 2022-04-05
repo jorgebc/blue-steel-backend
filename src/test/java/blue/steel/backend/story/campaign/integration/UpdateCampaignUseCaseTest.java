@@ -4,9 +4,9 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import blue.steel.backend.IntegrationTest;
 import blue.steel.backend.story.campaign.adapter.dto.UpdateCampaignInput;
-import blue.steel.backend.story.campaign.entity.Campaign;
-import blue.steel.backend.story.campaign.entity.CampaignRepository;
-import blue.steel.backend.story.campaign.entity.CampaignRepositoryTest;
+import blue.steel.backend.story.campaign.persistence.Campaign;
+import blue.steel.backend.story.campaign.persistence.CampaignRepository;
+import blue.steel.backend.story.campaign.persistence.CampaignRepositoryTest;
 import java.util.Arrays;
 import java.util.UUID;
 import org.junit.jupiter.api.DisplayName;

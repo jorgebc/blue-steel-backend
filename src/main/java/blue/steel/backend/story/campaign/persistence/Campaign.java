@@ -1,7 +1,7 @@
-package blue.steel.backend.story.campaign.entity;
+package blue.steel.backend.story.campaign.persistence;
 
-import blue.steel.backend.core.entity.AuditMetadata;
-import blue.steel.backend.core.entity.Versionable;
+import blue.steel.backend.core.persistence.AuditMetadata;
+import blue.steel.backend.core.persistence.Versionable;
 import blue.steel.backend.story.summary.persistence.Summary;
 import java.util.List;
 import java.util.UUID;

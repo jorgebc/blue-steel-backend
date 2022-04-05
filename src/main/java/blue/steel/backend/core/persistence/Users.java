@@ -1,4 +1,4 @@
-package blue.steel.backend.core.entity;
+package blue.steel.backend.core.persistence;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,7 +10,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class User {
+public class Users {
   @Id private String id;
   @NotNull private String userName;
 }

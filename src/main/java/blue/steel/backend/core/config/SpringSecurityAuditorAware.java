@@ -1,7 +1,7 @@
 package blue.steel.backend.core.config;
 
-import blue.steel.backend.core.entity.User;
-import blue.steel.backend.core.entity.UserRepository;
+import blue.steel.backend.core.persistence.UserRepository;
+import blue.steel.backend.core.persistence.Users;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.AuditorAware;
@@ -15,14 +15,14 @@ import org.springframework.stereotype.Component;
  * new user.
  */
 @Component
-public class SpringSecurityAuditorAware implements AuditorAware<User> {
+public class SpringSecurityAuditorAware implements AuditorAware<Users> {
 
   public static final String USER_NAME_CLAIM = "https://blue-steel.com/username";
 
   @Autowired private UserRepository userRepository;
 
   @Override
-  public Optional<User> getCurrentAuditor() {
+  public Optional<Users> getCurrentAuditor() {
 
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -31,11 +31,11 @@ public class SpringSecurityAuditorAware implements AuditorAware<User> {
     Jwt principal = (Jwt) authentication.getPrincipal();
     String username = principal.getClaim(USER_NAME_CLAIM);
 
-    User newUser = new User();
+    Users newUser = new Users();
     newUser.setId(id);
     newUser.setUserName(username);
 
-    User user = userRepository.findById(id).orElse(userRepository.save(newUser));
+    Users user = userRepository.findById(id).orElse(userRepository.save(newUser));
     return Optional.of(user);
   }
 }

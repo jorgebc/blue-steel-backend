@@ -3,9 +3,9 @@ package blue.steel.backend.story.summary.integration;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import blue.steel.backend.IntegrationTest;
-import blue.steel.backend.story.campaign.entity.Campaign;
-import blue.steel.backend.story.campaign.entity.CampaignRepository;
-import blue.steel.backend.story.campaign.entity.CampaignRepositoryTest;
+import blue.steel.backend.story.campaign.persistence.Campaign;
+import blue.steel.backend.story.campaign.persistence.CampaignRepository;
+import blue.steel.backend.story.campaign.persistence.CampaignRepositoryTest;
 import blue.steel.backend.story.summary.adapter.dto.CreateCampaignSummaryInput;
 import blue.steel.backend.story.summary.persistence.Summary;
 import java.time.LocalDate;

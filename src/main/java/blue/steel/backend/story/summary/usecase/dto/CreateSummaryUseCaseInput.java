@@ -1,7 +1,7 @@
 package blue.steel.backend.story.summary.usecase.dto;
 
 import blue.steel.backend.core.usecase.UseCaseInput;
-import blue.steel.backend.story.campaign.entity.Campaign;
+import blue.steel.backend.story.campaign.persistence.Campaign;
 import blue.steel.backend.story.summary.persistence.Summary;
 import java.time.LocalDate;
 import java.util.UUID;

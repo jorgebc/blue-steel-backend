@@ -1,8 +1,8 @@
 package blue.steel.backend.story.summary.persistence;
 
-import blue.steel.backend.core.entity.AuditMetadata;
-import blue.steel.backend.core.entity.Versionable;
-import blue.steel.backend.story.campaign.entity.Campaign;
+import blue.steel.backend.core.persistence.AuditMetadata;
+import blue.steel.backend.core.persistence.Versionable;
+import blue.steel.backend.story.campaign.persistence.Campaign;
 import java.time.LocalDate;
 import java.util.UUID;
 import javax.persistence.Column;

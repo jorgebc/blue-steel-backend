@@ -1,9 +1,9 @@
 package blue.steel.backend.story.summary.entity;
 
-import blue.steel.backend.IntegrationTest;
-import blue.steel.backend.story.campaign.entity.Campaign;
-import blue.steel.backend.story.campaign.entity.CampaignRepository;
-import blue.steel.backend.story.campaign.entity.CampaignRepositoryTest;
+import blue.steel.backend.RepositoryTest;
+import blue.steel.backend.story.campaign.persistence.Campaign;
+import blue.steel.backend.story.campaign.persistence.CampaignRepository;
+import blue.steel.backend.story.campaign.persistence.CampaignRepositoryTest;
 import blue.steel.backend.story.summary.persistence.Summary;
 import blue.steel.backend.story.summary.persistence.SummaryRepository;
 import java.time.LocalDate;
@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /** Campaign summary repository tests. */
-public class SummaryRepositoryTest extends IntegrationTest {
+public class SummaryRepositoryTest extends RepositoryTest {
 
   @Autowired private CampaignRepository campaignRepository;
   @Autowired private SummaryRepository summaryRepository;

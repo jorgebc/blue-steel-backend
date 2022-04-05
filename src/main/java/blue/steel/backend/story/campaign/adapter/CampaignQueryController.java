@@ -4,7 +4,7 @@ import blue.steel.backend.story.campaign.adapter.dto.GetActualCampaignPayload;
 import blue.steel.backend.story.campaign.adapter.dto.GetCampaignInput;
 import blue.steel.backend.story.campaign.adapter.dto.GetCampaignPayload;
 import blue.steel.backend.story.campaign.adapter.dto.GetCampaignsPayload;
-import blue.steel.backend.story.campaign.entity.Campaign;
+import blue.steel.backend.story.campaign.persistence.Campaign;
 import blue.steel.backend.story.campaign.usecase.CampaignQuery;
 import java.util.Collection;
 import java.util.UUID;

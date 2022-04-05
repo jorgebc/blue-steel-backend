@@ -2,8 +2,8 @@ package blue.steel.backend.story.campaign.usecase;
 
 import blue.steel.backend.core.usecase.EntityUtils;
 import blue.steel.backend.core.usecase.UseCase;
-import blue.steel.backend.story.campaign.entity.Campaign;
-import blue.steel.backend.story.campaign.entity.CampaignRepository;
+import blue.steel.backend.story.campaign.persistence.Campaign;
+import blue.steel.backend.story.campaign.persistence.CampaignRepository;
 import blue.steel.backend.story.campaign.usecase.dto.UpdateCampaignUseCaseInput;
 import blue.steel.backend.story.campaign.usecase.dto.UpdateCampaignUseCaseOutput;
 import java.util.UUID;

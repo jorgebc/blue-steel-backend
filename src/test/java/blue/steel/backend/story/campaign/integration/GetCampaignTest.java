@@ -4,9 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import blue.steel.backend.IntegrationTest;
 import blue.steel.backend.story.campaign.adapter.dto.GetCampaignInput;
-import blue.steel.backend.story.campaign.entity.Campaign;
-import blue.steel.backend.story.campaign.entity.CampaignRepository;
-import blue.steel.backend.story.campaign.entity.CampaignRepositoryTest;
+import blue.steel.backend.story.campaign.persistence.Campaign;
+import blue.steel.backend.story.campaign.persistence.CampaignRepository;
+import blue.steel.backend.story.campaign.persistence.CampaignRepositoryTest;
 import blue.steel.backend.story.summary.entity.SummaryRepositoryTest;
 import blue.steel.backend.story.summary.persistence.Summary;
 import blue.steel.backend.story.summary.persistence.SummaryRepository;

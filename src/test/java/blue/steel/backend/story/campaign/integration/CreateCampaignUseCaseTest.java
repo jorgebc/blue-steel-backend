@@ -4,7 +4,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import blue.steel.backend.IntegrationTest;
 import blue.steel.backend.story.campaign.adapter.dto.CreateCampaignInput;
-import blue.steel.backend.story.campaign.entity.Campaign;
+import blue.steel.backend.story.campaign.persistence.Campaign;
 import java.util.Arrays;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

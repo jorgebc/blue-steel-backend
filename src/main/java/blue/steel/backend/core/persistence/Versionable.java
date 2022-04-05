@@ -1,4 +1,4 @@
-package blue.steel.backend.core.entity;
+package blue.steel.backend.core.persistence;
 
 /** Interface for manually checking optimistic locking. */
 public interface Versionable {

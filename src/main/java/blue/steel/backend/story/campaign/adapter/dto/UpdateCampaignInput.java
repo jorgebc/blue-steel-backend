@@ -1,6 +1,6 @@
 package blue.steel.backend.story.campaign.adapter.dto;
 
-import blue.steel.backend.story.campaign.entity.Campaign;
+import blue.steel.backend.story.campaign.persistence.Campaign;
 import blue.steel.backend.story.campaign.usecase.dto.UpdateCampaignUseCaseInput;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.UUID;

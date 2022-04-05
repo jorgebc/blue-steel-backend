@@ -1,6 +1,6 @@
 package blue.steel.backend.core.usecase;
 
-import blue.steel.backend.core.entity.Versionable;
+import blue.steel.backend.core.persistence.Versionable;
 import javax.persistence.OptimisticLockException;
 import org.springframework.beans.BeanUtils;
 
