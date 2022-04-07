@@ -1,11 +1,9 @@
-package blue.steel.backend.story.summary.entity;
+package blue.steel.backend.story.summary.persistence;
 
 import blue.steel.backend.RepositoryTest;
 import blue.steel.backend.story.campaign.persistence.Campaign;
 import blue.steel.backend.story.campaign.persistence.CampaignRepository;
 import blue.steel.backend.story.campaign.persistence.CampaignRepositoryTest;
-import blue.steel.backend.story.summary.persistence.Summary;
-import blue.steel.backend.story.summary.persistence.SummaryRepository;
 import java.time.LocalDate;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

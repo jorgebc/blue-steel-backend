@@ -33,7 +33,12 @@ class CreateCampaignSummaryUseCaseTest extends IntegrationTest {
 
     // And a valid creation campaign summary input
     CreateCampaignSummaryInput createCampaignSummaryInput =
-        new CreateCampaignSummaryInput(campaignId, "name", "description", LocalDate.now());
+        CreateCampaignSummaryInput.builder()
+            .campaignId(campaignId)
+            .name("name")
+            .description("description")
+            .gameDate(LocalDate.now())
+            .build();
 
     // When creating a campaign summary
     getGraphQlTesterWithAdminJwtToken(CREATE_CAMPAIGN_SUMMARY_QUERY)

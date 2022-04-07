@@ -6,10 +6,12 @@ import java.time.LocalDate;
 import java.util.UUID;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import lombok.Value;
+import lombok.Builder;
+import lombok.Data;
 
 /** Create campaign summary input. */
-@Value
+@Data
+@Builder
 public class CreateCampaignSummaryInput {
 
   @NotNull UUID campaignId;

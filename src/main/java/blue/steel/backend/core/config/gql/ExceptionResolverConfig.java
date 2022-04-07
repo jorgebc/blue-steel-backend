@@ -1,4 +1,4 @@
-package blue.steel.backend.core.config;
+package blue.steel.backend.core.config.gql;
 
 import graphql.GraphqlErrorBuilder;
 import javax.persistence.EntityNotFoundException;

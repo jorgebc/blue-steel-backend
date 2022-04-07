@@ -7,10 +7,10 @@ extend type Mutation {
 }
 
 type Summary {
-    id: ID!
+    id: UUID!
     name: String!
     description: String!
-    gameDate:String!
+    gameDate:LocalDate!
     campaign: Campaign!
     auditingMetadata: AuditMetadata!
     version: Float!

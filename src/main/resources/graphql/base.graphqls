@@ -1,8 +1,9 @@
 # java.time.LocalDate implementation
-#scalar LocalDate
-
+scalar LocalDate
 # java.time.LocalDateTime implementation
-#scalar LocalDateTime
+scalar LocalDateTime
+# java.util.UUID implementation
+scalar UUID
 
 type Query {
 
