@@ -12,12 +12,14 @@ import org.springframework.graphql.test.tester.GraphQlTester;
 import org.springframework.graphql.test.tester.WebGraphQlTester;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.test.annotation.DirtiesContext;
 
 /** Base class for use case tests. */
 @SpringBootTest
 @WithMockAdminUser
 @Transactional
 @AutoConfigureHttpGraphQlTester
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public abstract class IntegrationTest {
 
   protected static final String VALID_JWT_TOKEN = "token";

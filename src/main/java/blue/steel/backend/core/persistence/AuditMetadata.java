@@ -21,12 +21,12 @@ public class AuditMetadata {
   @ManyToOne
   @JoinColumn(name = "created_by_id")
   @CreatedBy
-  private Users createdBy;
+  private User createdBy;
 
   @ManyToOne
   @JoinColumn(name = "last_modified_by_id")
   @LastModifiedBy
-  private Users lastModifiedBy;
+  private User lastModifiedBy;
 
   @CreatedDate
   @Column(columnDefinition = "TIMESTAMP")

@@ -15,6 +15,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.execution.ErrorType;
+import org.springframework.test.context.transaction.TestTransaction;
 
 class GetCampaignTest extends IntegrationTest {
 
@@ -29,11 +30,18 @@ class GetCampaignTest extends IntegrationTest {
     // Given a campaign with a summary
     Campaign campaign = CampaignRepositoryTest.createCampaign();
     campaign = campaignRepository.save(campaign);
-    UUID campaignId = campaign.getId();
+    TestTransaction.flagForCommit();
+    TestTransaction.end();
+    TestTransaction.start();
+
     Summary summary = SummaryRepositoryTest.createSummary(campaign);
     summaryRepository.save(summary);
+    TestTransaction.flagForCommit();
+    TestTransaction.end();
+    TestTransaction.start();
 
     // When fetching the campaign
+    UUID campaignId = campaign.getId();
     GetCampaignInput getCampaignInput = new GetCampaignInput(campaignId);
     getGraphQlTesterWithAdminJwtToken(GET_CAMPAIGN_QUERY)
         .variable("input", getCampaignInput)
@@ -43,8 +51,7 @@ class GetCampaignTest extends IntegrationTest {
 
         // Then response should contain a campaign
         .satisfies(fetchedCampaign -> assertThat(fetchedCampaign.getId()).isEqualTo(campaignId))
-        .satisfies(
-            fetchedCampaign -> assertThat(fetchedCampaign.getSummaries()).asList().isNotEmpty());
+        .satisfies(fetchedCampaign -> assertThat(fetchedCampaign.getSummaries()).isNotEmpty());
   }
 
   @Test

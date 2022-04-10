@@ -1,7 +1,6 @@
 package blue.steel.backend.story.summary.usecase.dto;
 
 import blue.steel.backend.core.usecase.UseCaseInput;
-import blue.steel.backend.story.campaign.persistence.Campaign;
 import blue.steel.backend.story.summary.persistence.Summary;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -26,11 +25,6 @@ public class CreateSummaryUseCaseInput implements UseCaseInput {
     summary.setName(getName());
     summary.setDescription(getDescription());
     summary.setGameDate(getGameDate());
-
-    Campaign campaign = new Campaign();
-    campaign.setId(getCampaignId());
-    summary.setCampaign(campaign);
-
     return summary;
   }
 }

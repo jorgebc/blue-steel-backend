@@ -8,6 +8,7 @@ import blue.steel.backend.story.campaign.persistence.Campaign;
 import blue.steel.backend.story.campaign.persistence.CampaignRepository;
 import blue.steel.backend.story.campaign.persistence.CampaignRepositoryTest;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.UUID;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -82,7 +83,7 @@ class DeleteCampaignUseCaseTest extends IntegrationTest {
             graphQLError ->
                 graphQLError.getErrorType().equals(ErrorType.BAD_REQUEST)
                     && Arrays.stream(inputFieldNamesWithErrors)
-                        .allMatch(graphQLError.getMessage()::contains))
+                        .allMatch(Objects.requireNonNull(graphQLError.getMessage())::contains))
         .verify();
   }
 }

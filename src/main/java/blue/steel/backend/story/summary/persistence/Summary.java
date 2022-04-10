@@ -12,11 +12,11 @@ import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -24,6 +24,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 public class Summary implements Versionable {
 
@@ -43,7 +44,6 @@ public class Summary implements Versionable {
   @NotNull private LocalDate gameDate;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "campaign_id")
   private Campaign campaign;
 
   @Embedded private AuditMetadata auditingMetadata = new AuditMetadata();

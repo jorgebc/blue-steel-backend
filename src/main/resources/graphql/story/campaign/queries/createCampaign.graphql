@@ -8,11 +8,11 @@ mutation CreateCampaign($input: CreateCampaignInput!) {
             auditingMetadata {
                 createdBy {
                     id
-                    userName
+                    name
                 }
                 lastModifiedBy {
                     id
-                    userName
+                    name
                 }
                 creationDate
                 lastModifiedDate

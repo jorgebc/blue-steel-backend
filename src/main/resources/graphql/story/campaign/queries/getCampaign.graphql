@@ -13,11 +13,11 @@ query GetCampaign($input: GetCampaignInput!) {
                 auditingMetadata {
                     createdBy {
                         id
-                        userName
+                        name
                     }
                     lastModifiedBy {
                         id
-                        userName
+                        name
                     }
                     creationDate
                     lastModifiedDate
@@ -27,11 +27,11 @@ query GetCampaign($input: GetCampaignInput!) {
             auditingMetadata {
                 createdBy {
                     id
-                    userName
+                    name
                 }
                 lastModifiedBy {
                     id
-                    userName
+                    name
                 }
                 creationDate
                 lastModifiedDate

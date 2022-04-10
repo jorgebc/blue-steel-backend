@@ -1,6 +1,6 @@
 package blue.steel.backend.story.summary.persistence;
 
-import blue.steel.backend.RepositoryTest;
+import blue.steel.backend.IntegrationTest;
 import blue.steel.backend.story.campaign.persistence.Campaign;
 import blue.steel.backend.story.campaign.persistence.CampaignRepository;
 import blue.steel.backend.story.campaign.persistence.CampaignRepositoryTest;
@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /** Campaign summary repository tests. */
-public class SummaryRepositoryTest extends RepositoryTest {
+public class SummaryRepositoryTest extends IntegrationTest {
 
   @Autowired private CampaignRepository campaignRepository;
   @Autowired private SummaryRepository summaryRepository;
@@ -31,16 +31,14 @@ public class SummaryRepositoryTest extends RepositoryTest {
   }
 
   @Test
-  @DisplayName("Create a campaign summary")
+  @DisplayName("Should save a campaign summary")
   void createCampaignSummary() {
     // Given a campaign
     Campaign campaign = CampaignRepositoryTest.createCampaign();
     campaignRepository.save(campaign);
 
-    // And a summary
+    // When saving a summary
     Summary summary = createSummary(campaign);
-
-    // When creating a summary
     summary = summaryRepository.save(summary);
 
     // Then the summary id should not be null
