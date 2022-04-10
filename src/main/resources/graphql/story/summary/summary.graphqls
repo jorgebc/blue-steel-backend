@@ -4,6 +4,7 @@ extend type Query {
 
 extend type Mutation {
     createCampaignSummary(input: CreateCampaignSummaryInput!): CreateCampaignSummaryPayload!
+    updateCampaignSummary(input: UpdateCampaignSummaryInput!): UpdateCampaignSummaryPayload!
 }
 
 type Summary {
@@ -28,5 +29,18 @@ input CreateCampaignSummaryInput {
 }
 
 type CreateCampaignSummaryPayload {
+    summary: Summary!
+}
+
+input UpdateCampaignSummaryInput {
+    campaignId: ID!
+    id: ID!
+    name: String!
+    description: String!
+    gameDate:String!
+    version: Int!
+}
+
+type UpdateCampaignSummaryPayload {
     summary: Summary!
 }

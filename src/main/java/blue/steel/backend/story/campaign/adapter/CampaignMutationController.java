@@ -45,8 +45,10 @@ public class CampaignMutationController {
    */
   @MutationMapping
   public CreateCampaignPayload createCampaign(@Argument @Valid @NotNull CreateCampaignInput input) {
+
     CreateCampaignUseCaseInput createCampaignInput = input.getCreateCampaignUseCaseInput();
     CreateCampaignUseCaseOutput createCampaignOutput = createCampaign.execute(createCampaignInput);
+
     Campaign createdCampaign = createCampaignOutput.getCreatedCampaign();
     return new CreateCampaignPayload(createdCampaign);
   }
@@ -59,8 +61,10 @@ public class CampaignMutationController {
    */
   @MutationMapping
   public UpdateCampaignPayload updateCampaign(@Argument @Valid @NotNull UpdateCampaignInput input) {
+
     UpdateCampaignUseCaseInput updateCampaignInput = input.getUpdateCampaignUseCaseInput();
     UpdateCampaignUseCaseOutput updateCampaignOutput = updateCampaign.execute(updateCampaignInput);
+
     Campaign updatedCampaign = updateCampaignOutput.getUpdatedCampaign();
     return new UpdateCampaignPayload(updatedCampaign);
   }
@@ -73,9 +77,11 @@ public class CampaignMutationController {
    */
   @MutationMapping
   public DeleteCampaignPayload deleteCampaign(@Argument @Valid @NotNull DeleteCampaignInput input) {
+
     UUID campaignId = input.getCampaignId();
     DeleteCampaignUseCaseInput deleteCampaignInput = new DeleteCampaignUseCaseInput(campaignId);
     DeleteCampaignUseCaseOutput deletedCampaignOutput = deleteCampaign.execute(deleteCampaignInput);
+
     UUID deletedCampaignId = deletedCampaignOutput.getDeletedCampaignId();
     return new DeleteCampaignPayload(deletedCampaignId);
   }
@@ -89,12 +95,12 @@ public class CampaignMutationController {
   @MutationMapping
   public SetActualCampaignPayload setActualCampaign(
       @Argument @Valid @NotNull SetActualCampaignInput input) {
+
     UUID campaignId = input.getCampaignId();
-    SetActualCampaignUseCaseInput setActualCampaignInput =
-        new SetActualCampaignUseCaseInput(campaignId);
-    SetActualCampaignUseCaseOutput setActualCampaignOutput =
-        setActualCampaign.execute(setActualCampaignInput);
-    Campaign actualCampaign = setActualCampaignOutput.getActualCampaign();
+    SetActualCampaignUseCaseInput useCaseInput = new SetActualCampaignUseCaseInput(campaignId);
+    SetActualCampaignUseCaseOutput useCaseOutput = setActualCampaign.execute(useCaseInput);
+
+    Campaign actualCampaign = useCaseOutput.getActualCampaign();
     return new SetActualCampaignPayload(actualCampaign);
   }
 }

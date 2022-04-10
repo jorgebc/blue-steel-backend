@@ -12,13 +12,9 @@ import lombok.Value;
 @Value
 public class UpdateCampaignInput {
   @NotNull UUID id;
-
   @NotEmpty String name;
-
   @NotEmpty String description;
-
   @NotEmpty String imageUrl;
-
   @NotNull Integer version;
 
   /**

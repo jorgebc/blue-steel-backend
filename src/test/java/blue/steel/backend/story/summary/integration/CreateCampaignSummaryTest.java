@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /** Create campaign summary use case tests. */
-class CreateCampaignSummaryUseCaseTest extends IntegrationTest {
+class CreateCampaignSummaryTest extends IntegrationTest {
 
   private static final String CREATE_CAMPAIGN_SUMMARY_QUERY =
       "story/summary/queries/createCampaignSummary";

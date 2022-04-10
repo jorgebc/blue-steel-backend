@@ -20,12 +20,12 @@ public class CreateCampaignSummaryInput {
   @NotNull LocalDate gameDate;
 
   /**
-   * Maps the data to a new creation campaign summary use case input.
+   * Convert to use case input.
    *
-   * @return create campaign summary use case data
+   * @return use case input
    */
   @JsonIgnore
-  public CreateSummaryUseCaseInput getCreateCampaignSummaryUseCaseInput() {
+  public CreateSummaryUseCaseInput toCreateCampaignSummaryUseCaseInput() {
     return new CreateSummaryUseCaseInput(campaignId, name, description, gameDate);
   }
 }

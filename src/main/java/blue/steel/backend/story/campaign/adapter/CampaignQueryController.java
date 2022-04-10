@@ -10,19 +10,17 @@ import java.util.Collection;
 import java.util.UUID;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
 /** Campaign graphql query controller. */
 @Controller
+@RequiredArgsConstructor
 public class CampaignQueryController {
 
   private final CampaignQuery campaignQuery;
-
-  public CampaignQueryController(CampaignQuery campaignQuery) {
-    this.campaignQuery = campaignQuery;
-  }
 
   @QueryMapping
   public GetCampaignsPayload getCampaigns() {
