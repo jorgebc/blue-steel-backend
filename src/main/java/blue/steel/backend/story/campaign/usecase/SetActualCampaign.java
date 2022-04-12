@@ -46,6 +46,6 @@ public class SetActualCampaign
     campaign.setActual(true);
 
     Campaign actualCampaign = campaignRepository.save(campaign);
-    return new SetActualCampaignUseCaseOutput(actualCampaign);
+    return SetActualCampaignUseCaseOutput.builder().actualCampaign(actualCampaign).build();
   }
 }

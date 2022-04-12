@@ -4,10 +4,12 @@ import blue.steel.backend.core.usecase.UseCaseInput;
 import blue.steel.backend.story.summary.persistence.Summary;
 import java.time.LocalDate;
 import java.util.UUID;
+import lombok.Builder;
 import lombok.Value;
 
 /** Create campaign summary use case input. */
 @Value
+@Builder
 public class CreateSummaryUseCaseInput implements UseCaseInput {
 
   UUID campaignId;

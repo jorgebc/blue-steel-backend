@@ -36,6 +36,6 @@ public class UpdateCampaignSummary
     summary.setCampaign(campaign);
     summary = summaryRepository.save(summary);
 
-    return new UpdateSummaryUseCaseOutput(summary);
+    return UpdateSummaryUseCaseOutput.builder().summary(summary).build();
   }
 }

@@ -6,6 +6,7 @@ import blue.steel.backend.IntegrationTest;
 import blue.steel.backend.story.campaign.adapter.dto.CreateCampaignInput;
 import blue.steel.backend.story.campaign.persistence.Campaign;
 import java.util.Arrays;
+import java.util.Objects;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.graphql.execution.ErrorType;
@@ -20,7 +21,11 @@ class CreateCampaignUseCaseTest extends IntegrationTest {
   void createValidCampaign() {
     // Given a valid create campaign input
     CreateCampaignInput createCampaignInput =
-        new CreateCampaignInput("name", "description", "imageUrl");
+        CreateCampaignInput.builder()
+            .name("name")
+            .description("description")
+            .imageUrl("imageUrl")
+            .build();
 
     // When creating a campaign
     getGraphQlTesterWithAdminJwtToken(CREATE_CAMPAIGN_QUERY)
@@ -37,7 +42,8 @@ class CreateCampaignUseCaseTest extends IntegrationTest {
   @DisplayName("Creating an invalid campaign should return bad request error")
   void createInvalidCampaign() {
     // Given an invalid create campaign input
-    CreateCampaignInput createCampaignInput = new CreateCampaignInput("", "", "");
+    CreateCampaignInput createCampaignInput =
+        CreateCampaignInput.builder().name("").description("").imageUrl("").build();
     String[] campaignFieldNamesWithErrors = {"name", "description", "imageUrl"};
 
     // When creating a campaign
@@ -51,7 +57,7 @@ class CreateCampaignUseCaseTest extends IntegrationTest {
             graphQLError ->
                 graphQLError.getErrorType().equals(ErrorType.BAD_REQUEST)
                     && Arrays.stream(campaignFieldNamesWithErrors)
-                        .allMatch(graphQLError.getMessage()::contains))
+                        .allMatch(Objects.requireNonNull(graphQLError.getMessage())::contains))
         .verify();
   }
 }

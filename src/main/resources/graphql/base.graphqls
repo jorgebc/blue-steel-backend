@@ -21,6 +21,6 @@ type User {
 type AuditMetadata {
     createdBy: User!
     lastModifiedBy: User!
-    creationDate: String!
-    lastModifiedDate: String!
+    creationDate: LocalDateTime!
+    lastModifiedDate: LocalDateTime!
 }

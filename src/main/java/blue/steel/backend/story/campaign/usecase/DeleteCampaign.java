@@ -30,6 +30,6 @@ public class DeleteCampaign
   public DeleteCampaignUseCaseOutput execute(DeleteCampaignUseCaseInput input) {
     UUID id = input.getCampaignId();
     campaignRepository.deleteById(id);
-    return new DeleteCampaignUseCaseOutput(id);
+    return DeleteCampaignUseCaseOutput.builder().deletedCampaignId(id).build();
   }
 }

@@ -2,10 +2,12 @@ package blue.steel.backend.story.campaign.usecase.dto;
 
 import blue.steel.backend.core.usecase.UseCaseInput;
 import blue.steel.backend.story.campaign.persistence.Campaign;
+import lombok.Builder;
 import lombok.Value;
 
 /** Create campaign use case input. */
 @Value
+@Builder
 public class CreateCampaignUseCaseInput implements UseCaseInput {
   String name;
 

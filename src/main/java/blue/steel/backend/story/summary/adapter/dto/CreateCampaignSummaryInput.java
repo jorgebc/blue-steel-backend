@@ -26,6 +26,11 @@ public class CreateCampaignSummaryInput {
    */
   @JsonIgnore
   public CreateSummaryUseCaseInput toCreateCampaignSummaryUseCaseInput() {
-    return new CreateSummaryUseCaseInput(campaignId, name, description, gameDate);
+    return CreateSummaryUseCaseInput.builder()
+        .campaignId(campaignId)
+        .name(name)
+        .description(description)
+        .gameDate(gameDate)
+        .build();
   }
 }

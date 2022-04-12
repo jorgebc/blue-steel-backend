@@ -36,6 +36,6 @@ public class UpdateCampaign
     EntityUtils.copyVersionableEntityProperties(input, campaign);
     campaign = campaignRepository.save(campaign);
 
-    return new UpdateCampaignUseCaseOutput(campaign);
+    return UpdateCampaignUseCaseOutput.builder().updatedCampaign(campaign).build();
   }
 }

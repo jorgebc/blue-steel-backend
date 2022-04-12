@@ -30,6 +30,6 @@ public class CreateCampaign
   public CreateCampaignUseCaseOutput execute(CreateCampaignUseCaseInput input) {
     Campaign campaign = input.getCampaign();
     campaign = campaignRepository.save(campaign);
-    return new CreateCampaignUseCaseOutput(campaign);
+    return CreateCampaignUseCaseOutput.builder().createdCampaign(campaign).build();
   }
 }

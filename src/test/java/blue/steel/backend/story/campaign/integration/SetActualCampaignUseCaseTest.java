@@ -31,7 +31,7 @@ class SetActualCampaignUseCaseTest extends IntegrationTest {
 
     // And a valid set actual campaign input
     UUID campaignId = UUID.randomUUID();
-    SetActualCampaignInput input = new SetActualCampaignInput(campaignId);
+    SetActualCampaignInput input = SetActualCampaignInput.builder().campaignId(campaignId).build();
 
     // When setting the campaign to be the actual
     getGraphQlTesterWithAdminJwtToken(SET_ACTUAL_CAMPAIGN_QUERY)
@@ -53,7 +53,7 @@ class SetActualCampaignUseCaseTest extends IntegrationTest {
 
     // And a valid set actual campaign input
     UUID campaignId = campaign.getId();
-    SetActualCampaignInput input = new SetActualCampaignInput(campaignId);
+    SetActualCampaignInput input = SetActualCampaignInput.builder().campaignId(campaignId).build();
 
     // When setting the campaign to be the actual
     getGraphQlTesterWithAdminJwtToken(SET_ACTUAL_CAMPAIGN_QUERY)
@@ -79,7 +79,7 @@ class SetActualCampaignUseCaseTest extends IntegrationTest {
 
     // And a valid set actual campaign input
     UUID campaignId = campaign.getId();
-    SetActualCampaignInput input = new SetActualCampaignInput(campaignId);
+    SetActualCampaignInput input = SetActualCampaignInput.builder().campaignId(campaignId).build();
 
     // When setting the campaign to be the actual
     getGraphQlTesterWithAdminJwtToken(SET_ACTUAL_CAMPAIGN_QUERY)
