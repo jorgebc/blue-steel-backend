@@ -45,6 +45,12 @@
             <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
         </dependency>
 
+        <!-- DB-->
+        <dependency>
+            <artifactId>postgresql</artifactId>
+            <groupId>org.postgresql</groupId>
+        </dependency>
+
         <!--Testing-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -66,11 +72,10 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <artifactId>h2</artifactId>
             <groupId>com.h2database</groupId>
-            <scope>runtime</scope>
+            <scope>test</scope>
         </dependency>
 
         <!--Developer tools-->
