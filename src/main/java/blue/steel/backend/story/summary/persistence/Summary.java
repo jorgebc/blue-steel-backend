@@ -1,28 +1,34 @@
-package blue.steel.backend.story.campaign.entity;
+package blue.steel.backend.story.summary.persistence;
 
-import blue.steel.backend.core.entity.AuditMetadata;
-import blue.steel.backend.core.entity.Versionable;
+import blue.steel.backend.core.persistence.AuditMetadata;
+import blue.steel.backend.core.persistence.Versionable;
+import blue.steel.backend.story.campaign.persistence.Campaign;
+import java.time.LocalDate;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-/** Campaign JPA entity. */
+/** Campaign summary JPA entity. */
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Campaign implements Versionable {
+public class Summary implements Versionable {
 
-  @Version Integer version;
+  @Version private Integer version;
 
   @Id
   @Column(length = 16)
@@ -35,7 +41,10 @@ public class Campaign implements Versionable {
   @Column(columnDefinition = "TEXT")
   private String description;
 
-  @NotNull private String imageUrl;
-  private boolean actual;
+  @NotNull private LocalDate gameDate;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  private Campaign campaign;
+
   @Embedded private AuditMetadata auditingMetadata = new AuditMetadata();
 }

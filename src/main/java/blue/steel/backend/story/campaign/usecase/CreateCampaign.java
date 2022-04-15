@@ -1,8 +1,8 @@
 package blue.steel.backend.story.campaign.usecase;
 
 import blue.steel.backend.core.usecase.UseCase;
-import blue.steel.backend.story.campaign.entity.Campaign;
-import blue.steel.backend.story.campaign.entity.CampaignRepository;
+import blue.steel.backend.story.campaign.persistence.Campaign;
+import blue.steel.backend.story.campaign.persistence.CampaignRepository;
 import blue.steel.backend.story.campaign.usecase.dto.CreateCampaignUseCaseInput;
 import blue.steel.backend.story.campaign.usecase.dto.CreateCampaignUseCaseOutput;
 import javax.transaction.Transactional;
@@ -30,6 +30,6 @@ public class CreateCampaign
   public CreateCampaignUseCaseOutput execute(CreateCampaignUseCaseInput input) {
     Campaign campaign = input.getCampaign();
     campaign = campaignRepository.save(campaign);
-    return new CreateCampaignUseCaseOutput(campaign);
+    return CreateCampaignUseCaseOutput.builder().createdCampaign(campaign).build();
   }
 }

@@ -1,8 +1,8 @@
 package blue.steel.backend.story.campaign.usecase;
 
 import blue.steel.backend.core.usecase.UseCase;
-import blue.steel.backend.story.campaign.entity.Campaign;
-import blue.steel.backend.story.campaign.entity.CampaignRepository;
+import blue.steel.backend.story.campaign.persistence.Campaign;
+import blue.steel.backend.story.campaign.persistence.CampaignRepository;
 import blue.steel.backend.story.campaign.usecase.dto.SetActualCampaignUseCaseInput;
 import blue.steel.backend.story.campaign.usecase.dto.SetActualCampaignUseCaseOutput;
 import java.util.UUID;
@@ -46,6 +46,6 @@ public class SetActualCampaign
     campaign.setActual(true);
 
     Campaign actualCampaign = campaignRepository.save(campaign);
-    return new SetActualCampaignUseCaseOutput(actualCampaign);
+    return SetActualCampaignUseCaseOutput.builder().actualCampaign(actualCampaign).build();
   }
 }

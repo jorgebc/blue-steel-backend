@@ -1,4 +1,4 @@
-package blue.steel.backend.story.campaign.entity;
+package blue.steel.backend.story.campaign.persistence;
 
 import java.util.Optional;
 import java.util.UUID;

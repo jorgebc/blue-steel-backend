@@ -9,7 +9,7 @@ import blue.steel.backend.story.campaign.adapter.dto.SetActualCampaignInput;
 import blue.steel.backend.story.campaign.adapter.dto.SetActualCampaignPayload;
 import blue.steel.backend.story.campaign.adapter.dto.UpdateCampaignInput;
 import blue.steel.backend.story.campaign.adapter.dto.UpdateCampaignPayload;
-import blue.steel.backend.story.campaign.entity.Campaign;
+import blue.steel.backend.story.campaign.persistence.Campaign;
 import blue.steel.backend.story.campaign.usecase.dto.CreateCampaignUseCaseInput;
 import blue.steel.backend.story.campaign.usecase.dto.CreateCampaignUseCaseOutput;
 import blue.steel.backend.story.campaign.usecase.dto.DeleteCampaignUseCaseInput;
@@ -21,12 +21,14 @@ import blue.steel.backend.story.campaign.usecase.dto.UpdateCampaignUseCaseOutput
 import java.util.UUID;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.stereotype.Controller;
 
 /** Campaign mutation controller. */
 @Controller
+@RequiredArgsConstructor
 public class CampaignMutationController {
 
   private final UseCase<CreateCampaignUseCaseInput, CreateCampaignUseCaseOutput> createCampaign;
@@ -36,25 +38,6 @@ public class CampaignMutationController {
       setActualCampaign;
 
   /**
-   * Constructor.
-   *
-   * @param createCampaign create campaign use case
-   * @param updateCampaign update campaign use case
-   * @param deleteCampaign delete campaign use case
-   * @param setActualCampaign set actual campaign use case
-   */
-  public CampaignMutationController(
-      UseCase<CreateCampaignUseCaseInput, CreateCampaignUseCaseOutput> createCampaign,
-      UseCase<UpdateCampaignUseCaseInput, UpdateCampaignUseCaseOutput> updateCampaign,
-      UseCase<DeleteCampaignUseCaseInput, DeleteCampaignUseCaseOutput> deleteCampaign,
-      UseCase<SetActualCampaignUseCaseInput, SetActualCampaignUseCaseOutput> setActualCampaign) {
-    this.createCampaign = createCampaign;
-    this.updateCampaign = updateCampaign;
-    this.deleteCampaign = deleteCampaign;
-    this.setActualCampaign = setActualCampaign;
-  }
-
-  /**
    * Creates a new campaign.
    *
    * @param input campaign data
@@ -62,10 +45,12 @@ public class CampaignMutationController {
    */
   @MutationMapping
   public CreateCampaignPayload createCampaign(@Argument @Valid @NotNull CreateCampaignInput input) {
-    CreateCampaignUseCaseInput createCampaignInput = input.getCreateCampaignUseCaseInput();
+
+    CreateCampaignUseCaseInput createCampaignInput = input.toCreateCampaignUseCaseInput();
     CreateCampaignUseCaseOutput createCampaignOutput = createCampaign.execute(createCampaignInput);
+
     Campaign createdCampaign = createCampaignOutput.getCreatedCampaign();
-    return new CreateCampaignPayload(createdCampaign);
+    return CreateCampaignPayload.builder().campaign(createdCampaign).build();
   }
 
   /**
@@ -76,10 +61,12 @@ public class CampaignMutationController {
    */
   @MutationMapping
   public UpdateCampaignPayload updateCampaign(@Argument @Valid @NotNull UpdateCampaignInput input) {
-    UpdateCampaignUseCaseInput updateCampaignInput = input.getUpdateCampaignUseCaseInput();
+
+    UpdateCampaignUseCaseInput updateCampaignInput = input.toUpdateCampaignUseCaseInput();
     UpdateCampaignUseCaseOutput updateCampaignOutput = updateCampaign.execute(updateCampaignInput);
+
     Campaign updatedCampaign = updateCampaignOutput.getUpdatedCampaign();
-    return new UpdateCampaignPayload(updatedCampaign);
+    return UpdateCampaignPayload.builder().campaign(updatedCampaign).build();
   }
 
   /**
@@ -90,11 +77,12 @@ public class CampaignMutationController {
    */
   @MutationMapping
   public DeleteCampaignPayload deleteCampaign(@Argument @Valid @NotNull DeleteCampaignInput input) {
-    UUID campaignId = input.getCampaignId();
-    DeleteCampaignUseCaseInput deleteCampaignInput = new DeleteCampaignUseCaseInput(campaignId);
+
+    DeleteCampaignUseCaseInput deleteCampaignInput = input.toDeleteSummaryUseCaseInput();
     DeleteCampaignUseCaseOutput deletedCampaignOutput = deleteCampaign.execute(deleteCampaignInput);
+
     UUID deletedCampaignId = deletedCampaignOutput.getDeletedCampaignId();
-    return new DeleteCampaignPayload(deletedCampaignId);
+    return DeleteCampaignPayload.builder().campaignId(deletedCampaignId).build();
   }
 
   /**
@@ -106,12 +94,11 @@ public class CampaignMutationController {
   @MutationMapping
   public SetActualCampaignPayload setActualCampaign(
       @Argument @Valid @NotNull SetActualCampaignInput input) {
-    UUID campaignId = input.getCampaignId();
-    SetActualCampaignUseCaseInput setActualCampaignInput =
-        new SetActualCampaignUseCaseInput(campaignId);
-    SetActualCampaignUseCaseOutput setActualCampaignOutput =
-        setActualCampaign.execute(setActualCampaignInput);
-    Campaign actualCampaign = setActualCampaignOutput.getActualCampaign();
-    return new SetActualCampaignPayload(actualCampaign);
+
+    SetActualCampaignUseCaseInput useCaseInput = input.toSetActualCampaignUseCaseInput();
+    SetActualCampaignUseCaseOutput useCaseOutput = setActualCampaign.execute(useCaseInput);
+
+    Campaign actualCampaign = useCaseOutput.getActualCampaign();
+    return SetActualCampaignPayload.builder().campaign(actualCampaign).build();
   }
 }

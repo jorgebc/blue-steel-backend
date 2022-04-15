@@ -1,34 +1,48 @@
 package blue.steel.backend.story.campaign.integration;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import blue.steel.backend.IntegrationTest;
 import blue.steel.backend.story.campaign.adapter.dto.GetCampaignInput;
-import blue.steel.backend.story.campaign.entity.Campaign;
-import blue.steel.backend.story.campaign.entity.CampaignRepository;
-import blue.steel.backend.story.campaign.entity.CampaignRepositoryTest;
+import blue.steel.backend.story.campaign.persistence.Campaign;
+import blue.steel.backend.story.campaign.persistence.CampaignRepository;
+import blue.steel.backend.story.campaign.persistence.CampaignRepositoryTest;
+import blue.steel.backend.story.summary.persistence.Summary;
+import blue.steel.backend.story.summary.persistence.SummaryRepository;
+import blue.steel.backend.story.summary.persistence.SummaryRepositoryTest;
 import java.util.UUID;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.execution.ErrorType;
+import org.springframework.test.context.transaction.TestTransaction;
 
 class GetCampaignTest extends IntegrationTest {
 
   public static final String GET_CAMPAIGN_QUERY = "story/campaign/queries/getCampaign";
 
   @Autowired private CampaignRepository campaignRepository;
+  @Autowired private SummaryRepository summaryRepository;
 
   @Test
-  @DisplayName("Fetching for an existing campaign should return a campaign")
-  void getExistingCampaign() {
-    // Given a campaign
+  @DisplayName("Fetching for an existing campaign should return a campaign with summaries")
+  void getExistingCampaignWithSummaries() {
+    // Given a campaign with a summary
     Campaign campaign = CampaignRepositoryTest.createCampaign();
     campaign = campaignRepository.save(campaign);
-    UUID campaignId = campaign.getId();
-    GetCampaignInput getCampaignInput = new GetCampaignInput(campaignId);
+    TestTransaction.flagForCommit();
+    TestTransaction.end();
+    TestTransaction.start();
+
+    Summary summary = SummaryRepositoryTest.createSummary(campaign);
+    summaryRepository.save(summary);
+    TestTransaction.flagForCommit();
+    TestTransaction.end();
+    TestTransaction.start();
 
     // When fetching the campaign
+    UUID campaignId = campaign.getId();
+    GetCampaignInput getCampaignInput = new GetCampaignInput(campaignId);
     getGraphQlTesterWithAdminJwtToken(GET_CAMPAIGN_QUERY)
         .variable("input", getCampaignInput)
         .execute()
@@ -36,7 +50,8 @@ class GetCampaignTest extends IntegrationTest {
         .entity(Campaign.class)
 
         // Then response should contain a campaign
-        .satisfies(fetchedCampaign -> assertThat(fetchedCampaign.getId()).isEqualTo(campaignId));
+        .satisfies(fetchedCampaign -> assertThat(fetchedCampaign.getId()).isEqualTo(campaignId))
+        .satisfies(fetchedCampaign -> assertThat(fetchedCampaign.getSummaries()).isNotEmpty());
   }
 
   @Test

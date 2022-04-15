@@ -1,7 +1,7 @@
 package blue.steel.backend.story.campaign.usecase;
 
 import blue.steel.backend.core.usecase.UseCase;
-import blue.steel.backend.story.campaign.entity.CampaignRepository;
+import blue.steel.backend.story.campaign.persistence.CampaignRepository;
 import blue.steel.backend.story.campaign.usecase.dto.DeleteCampaignUseCaseInput;
 import blue.steel.backend.story.campaign.usecase.dto.DeleteCampaignUseCaseOutput;
 import java.util.UUID;
@@ -30,6 +30,6 @@ public class DeleteCampaign
   public DeleteCampaignUseCaseOutput execute(DeleteCampaignUseCaseInput input) {
     UUID id = input.getCampaignId();
     campaignRepository.deleteById(id);
-    return new DeleteCampaignUseCaseOutput(id);
+    return DeleteCampaignUseCaseOutput.builder().deletedCampaignId(id).build();
   }
 }

@@ -1,7 +1,8 @@
-package blue.steel.backend.core.entity;
+package blue.steel.backend.core.persistence;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +11,8 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@Table(name = "users")
 public class User {
   @Id private String id;
-  @NotNull private String userName;
+  @NotNull private String name;
 }

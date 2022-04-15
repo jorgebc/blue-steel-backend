@@ -4,10 +4,11 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import blue.steel.backend.IntegrationTest;
 import blue.steel.backend.story.campaign.adapter.dto.UpdateCampaignInput;
-import blue.steel.backend.story.campaign.entity.Campaign;
-import blue.steel.backend.story.campaign.entity.CampaignRepository;
-import blue.steel.backend.story.campaign.entity.CampaignRepositoryTest;
+import blue.steel.backend.story.campaign.persistence.Campaign;
+import blue.steel.backend.story.campaign.persistence.CampaignRepository;
+import blue.steel.backend.story.campaign.persistence.CampaignRepositoryTest;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.UUID;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,7 +33,13 @@ class UpdateCampaignUseCaseTest extends IntegrationTest {
     UUID id = campaign.getId();
     Integer version = campaign.getVersion();
     UpdateCampaignInput createCampaignInput =
-        new UpdateCampaignInput(id, "new name", "new description", "new imageUrl", version);
+        UpdateCampaignInput.builder()
+            .id(id)
+            .name("new name")
+            .description("new description")
+            .imageUrl("new imageUrl")
+            .version(version)
+            .build();
 
     // When updating a campaign
     getGraphQlTesterWithAdminJwtToken(UPDATE_CAMPAIGN_QUERY)
@@ -52,8 +59,13 @@ class UpdateCampaignUseCaseTest extends IntegrationTest {
 
     // And a valid update campaign input
     UpdateCampaignInput createCampaignInput =
-        new UpdateCampaignInput(
-            UUID.randomUUID(), "new name", "new description", "new imageUrl", 0);
+        UpdateCampaignInput.builder()
+            .id(UUID.randomUUID())
+            .name("new name")
+            .description("new description")
+            .imageUrl("new imageUrl")
+            .version(0)
+            .build();
 
     // When updating a campaign
     getGraphQlTesterWithAdminJwtToken(UPDATE_CAMPAIGN_QUERY)
@@ -71,7 +83,13 @@ class UpdateCampaignUseCaseTest extends IntegrationTest {
   void updateInvalidCampaign() {
     // Given an invalid update campaign input
     UpdateCampaignInput updateCampaignInput =
-        new UpdateCampaignInput(UUID.randomUUID(), "", "", "", 0);
+        UpdateCampaignInput.builder()
+            .id(UUID.randomUUID())
+            .name("")
+            .description("")
+            .imageUrl("")
+            .version(0)
+            .build();
     String[] campaignFieldNamesWithErrors = {"name", "description", "imageUrl"};
 
     // When updating a campaign
@@ -85,7 +103,7 @@ class UpdateCampaignUseCaseTest extends IntegrationTest {
             graphQLError ->
                 graphQLError.getErrorType().equals(ErrorType.BAD_REQUEST)
                     && Arrays.stream(campaignFieldNamesWithErrors)
-                        .allMatch(graphQLError.getMessage()::contains))
+                        .allMatch(Objects.requireNonNull(graphQLError.getMessage())::contains))
         .verify();
   }
 
@@ -99,7 +117,13 @@ class UpdateCampaignUseCaseTest extends IntegrationTest {
     // And a valid update campaign input with incorrect version
     UUID id = campaign.getId();
     UpdateCampaignInput createCampaignInput =
-        new UpdateCampaignInput(id, "new name", "new description", "new imageUrl", 4);
+        UpdateCampaignInput.builder()
+            .id(id)
+            .name("new name")
+            .description("new description")
+            .imageUrl("new imageUrl")
+            .version(4)
+            .build();
 
     // When updating a campaign
     getGraphQlTesterWithAdminJwtToken(UPDATE_CAMPAIGN_QUERY)

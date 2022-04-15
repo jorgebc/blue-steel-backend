@@ -1,7 +1,7 @@
 package blue.steel.backend.core.config;
 
-import blue.steel.backend.core.entity.User;
-import blue.steel.backend.core.entity.UserRepository;
+import blue.steel.backend.core.persistence.User;
+import blue.steel.backend.core.persistence.UserRepository;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.AuditorAware;
@@ -33,7 +33,7 @@ public class SpringSecurityAuditorAware implements AuditorAware<User> {
 
     User newUser = new User();
     newUser.setId(id);
-    newUser.setUserName(username);
+    newUser.setName(username);
 
     User user = userRepository.findById(id).orElse(userRepository.save(newUser));
     return Optional.of(user);

@@ -7,6 +7,7 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.security.test.context.support.WithSecurityContextFactory;
 
+/** WithMockAdminUser factory. */
 public class WithMockAdminUserSecurityContextFactory
     implements WithSecurityContextFactory<WithMockAdminUser> {
 
