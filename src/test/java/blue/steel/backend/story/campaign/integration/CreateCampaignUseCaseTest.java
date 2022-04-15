@@ -5,16 +5,20 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import blue.steel.backend.IntegrationTest;
 import blue.steel.backend.story.campaign.adapter.dto.CreateCampaignInput;
 import blue.steel.backend.story.campaign.persistence.Campaign;
+import blue.steel.backend.story.campaign.persistence.CampaignRepository;
 import java.util.Arrays;
 import java.util.Objects;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.execution.ErrorType;
 
 /** Create campaign use case tests. */
 class CreateCampaignUseCaseTest extends IntegrationTest {
 
   private static final String CREATE_CAMPAIGN_QUERY = "story/campaign/queries/createCampaign";
+
+  @Autowired private CampaignRepository campaignRepository;
 
   @Test
   @DisplayName("Creating a valid campaign should return a not null campaign")
@@ -36,6 +40,9 @@ class CreateCampaignUseCaseTest extends IntegrationTest {
 
         // Then response should contain a campaign
         .satisfies(campaign -> assertThat(campaign).isNotNull());
+
+    // And the campaign should be persisted
+    assertThat(campaignRepository.findAll().size()).isEqualTo(1);
   }
 
   @Test
