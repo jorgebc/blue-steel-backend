@@ -1,0 +1,42 @@
+query GetCampaign($input: GetCampaignInput!) {
+    getCampaign(input: $input) {
+        campaign {
+            id
+            name
+            description
+            imageUrl
+            summaries {
+                id
+                name
+                description
+                gameDate
+                auditingMetadata {
+                    createdBy {
+                        id
+                        name
+                    }
+                    lastModifiedBy {
+                        id
+                        name
+                    }
+                    creationDate
+                    lastModifiedDate
+                }
+                version
+            }
+            auditingMetadata {
+                createdBy {
+                    id
+                    name
+                }
+                lastModifiedBy {
+                    id
+                    name
+                }
+                creationDate
+                lastModifiedDate
+            }
+            version
+        }
+    }
+}

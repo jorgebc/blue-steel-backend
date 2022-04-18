@@ -1,0 +1,26 @@
+# java.time.LocalDate implementation
+scalar LocalDate
+# java.time.LocalDateTime implementation
+scalar LocalDateTime
+# java.util.UUID implementation
+scalar UUID
+
+type Query {
+
+}
+
+type Mutation {
+
+}
+
+type User {
+    id: String!
+    name: String!
+}
+
+type AuditMetadata {
+    createdBy: User!
+    lastModifiedBy: User!
+    creationDate: LocalDateTime!
+    lastModifiedDate: LocalDateTime!
+}

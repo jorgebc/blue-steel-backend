@@ -1,0 +1,55 @@
+extend type Query {
+    getSummary: GetSummaryPayload!
+}
+
+extend type Mutation {
+    createCampaignSummary(input: CreateCampaignSummaryInput!): CreateCampaignSummaryPayload!
+    updateCampaignSummary(input: UpdateCampaignSummaryInput!): UpdateCampaignSummaryPayload!
+    deleteCampaignSummary(input: DeleteCampaignSummaryInput!): DeleteCampaignSummaryPayload!
+}
+
+type Summary {
+    id: UUID!
+    name: String!
+    description: String!
+    gameDate:LocalDate!
+    campaign: Campaign!
+    auditingMetadata: AuditMetadata!
+    version: Float!
+}
+
+type GetSummaryPayload {
+    summary: Summary!
+}
+
+input CreateCampaignSummaryInput {
+    campaignId: UUID!
+    name: String!
+    description: String!
+    gameDate:String!
+}
+
+type CreateCampaignSummaryPayload {
+    summary: Summary!
+}
+
+input UpdateCampaignSummaryInput {
+    campaignId: UUID!
+    id: UUID!
+    name: String!
+    description: String!
+    gameDate:String!
+    version: Int!
+}
+
+type UpdateCampaignSummaryPayload {
+    summary: Summary!
+}
+
+input DeleteCampaignSummaryInput {
+    summaryId: UUID!
+}
+
+type DeleteCampaignSummaryPayload {
+    summaryId: UUID!
+}

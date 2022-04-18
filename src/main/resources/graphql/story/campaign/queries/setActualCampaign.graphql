@@ -1,0 +1,24 @@
+mutation SetActualCampaign($input: SetActualCampaignInput!) {
+    setActualCampaign(input: $input) {
+        campaign {
+            id
+            name
+            description
+            imageUrl
+            actual
+            auditingMetadata {
+                createdBy {
+                    id
+                    name
+                }
+                lastModifiedBy {
+                    id
+                    name
+                }
+                creationDate
+                lastModifiedDate
+            }
+            version
+        }
+    }
+}

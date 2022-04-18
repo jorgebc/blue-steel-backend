@@ -1,0 +1,5 @@
+mutation DeleteCampaign($input: DeleteCampaignInput!) {
+    deleteCampaign(input: $input) {
+        campaignId
+    }
+}

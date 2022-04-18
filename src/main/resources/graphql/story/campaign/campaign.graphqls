@@ -1,0 +1,78 @@
+extend type Query {
+    getCampaigns: GetCampaignsPayload!
+    getCampaign(input: GetCampaignInput!): GetCampaignPayload!
+    getActualCampaign: GetActualCampaignPayload!
+}
+
+extend type Mutation {
+    createCampaign(input: CreateCampaignInput!): CreateCampaignPayload!
+    updateCampaign(input: UpdateCampaignInput!): UpdateCampaignPayload!
+    deleteCampaign(input: DeleteCampaignInput!): DeleteCampaignPayload!
+    setActualCampaign(input: SetActualCampaignInput!): SetActualCampaignPayload!
+}
+
+type Campaign {
+    id: UUID!
+    name: String!
+    description: String!
+    imageUrl: String!
+    actual: Boolean!
+    summaries: [Summary]
+    auditingMetadata: AuditMetadata!
+    version: Float!
+}
+
+type GetCampaignsPayload {
+    campaigns: [Campaign]
+}
+
+input GetCampaignInput {
+    campaignId: UUID!
+}
+
+type GetActualCampaignPayload {
+    campaign: Campaign!
+}
+
+type GetCampaignPayload {
+    campaign: Campaign!
+}
+
+input CreateCampaignInput {
+    name: String!
+    description: String!
+    imageUrl: String!
+}
+
+type CreateCampaignPayload {
+    campaign: Campaign!
+}
+
+input UpdateCampaignInput {
+    id: UUID!
+    name: String!
+    description: String!
+    imageUrl: String!
+    version: Float!
+}
+
+type UpdateCampaignPayload {
+    campaign: Campaign!
+}
+
+input DeleteCampaignInput {
+    campaignId: UUID!
+}
+
+type DeleteCampaignPayload {
+    campaignId: UUID!
+}
+
+input SetActualCampaignInput {
+    campaignId: UUID!
+}
+
+type SetActualCampaignPayload {
+    campaign: Campaign!
+}
+
