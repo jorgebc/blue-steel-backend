@@ -42,6 +42,12 @@ public class SecurityConfig {
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     return http.httpBasic(AbstractHttpConfigurer::disable)
+        // TODO force ssl
+        // https://devcenter.heroku.com/articles/preparing-a-spring-boot-app-for-production-on-heroku#force-the-use-of-https
+        //        .requiresChannel()
+        //        .requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null)
+        //        .requiresSecure()
+        //        .and()
         .authorizeRequests()
         .anyRequest()
         .authenticated()
