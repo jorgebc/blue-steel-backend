@@ -47,8 +47,8 @@
 
         <!-- DB-->
         <dependency>
-            <artifactId>postgresql</artifactId>
             <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
         </dependency>
 
         <!--Testing-->
