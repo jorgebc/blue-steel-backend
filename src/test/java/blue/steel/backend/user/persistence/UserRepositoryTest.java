@@ -1,4 +1,4 @@
-package blue.steel.backend.core.persistence;
+package blue.steel.backend.user.persistence;
 
 import blue.steel.backend.IntegrationTest;
 import org.assertj.core.api.Assertions;
@@ -7,13 +7,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /** User repository test. */
-class UserRepositoryTest extends IntegrationTest {
+public class UserRepositoryTest extends IntegrationTest {
 
   @Autowired private UserRepository userRepository;
 
   @Test
   @DisplayName("Create a user")
-  void createUser() {
+  void save() {
     // Given a user
     User user = new User();
     user.setId("id2");
@@ -24,5 +24,17 @@ class UserRepositoryTest extends IntegrationTest {
 
     // Then the user id should not be null
     Assertions.assertThat(user.getId()).isNotNull();
+  }
+
+  /**
+   * Creates a user.
+   *
+   * @return the user
+   */
+  public static User createUser() {
+    User user = new User();
+    user.setId("id2");
+    user.setName("test2");
+    return user;
   }
 }

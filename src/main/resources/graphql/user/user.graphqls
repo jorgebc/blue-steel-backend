@@ -1,0 +1,12 @@
+extend type Query {
+    getUser(input: GetUserInput): GetUserPayload!
+}
+
+input GetUserInput {
+    userId: String!
+}
+
+type GetUserPayload {
+    user: User!
+}
+

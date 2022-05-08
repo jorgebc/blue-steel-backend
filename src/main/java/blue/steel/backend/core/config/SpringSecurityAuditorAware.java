@@ -1,7 +1,7 @@
 package blue.steel.backend.core.config;
 
-import blue.steel.backend.core.persistence.User;
-import blue.steel.backend.core.persistence.UserRepository;
+import blue.steel.backend.user.persistence.User;
+import blue.steel.backend.user.persistence.UserRepository;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.AuditorAware;

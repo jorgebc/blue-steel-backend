@@ -1,4 +1,4 @@
-package blue.steel.backend.core.persistence;
+package blue.steel.backend.user.persistence;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
