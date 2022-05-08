@@ -3,6 +3,7 @@ query GetUser($input: GetUserInput!) {
         user {
             id
             name
+            imageUrl
         }
     }
 }
