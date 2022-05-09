@@ -1,13 +1,10 @@
 package blue.steel.backend.user.adapter;
 
-import blue.steel.backend.user.adapter.dto.GetUserInput;
+import blue.steel.backend.core.util.SecurityUtils;
 import blue.steel.backend.user.adapter.dto.GetUserPayload;
 import blue.steel.backend.user.persistence.User;
 import blue.steel.backend.user.usecase.UserQuery;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
@@ -21,12 +18,11 @@ public class UserQueryController {
   /**
    * Gets user.
    *
-   * @param input use id
    * @return the user
    */
   @QueryMapping
-  public GetUserPayload getUser(@Argument @Valid @NotNull GetUserInput input) {
-    String userId = input.getUserId();
+  public GetUserPayload getUser() {
+    String userId = SecurityUtils.getUserId();
     User user = userQuery.findById(userId);
     return new GetUserPayload(user);
   }

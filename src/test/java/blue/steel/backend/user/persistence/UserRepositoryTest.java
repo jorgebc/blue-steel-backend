@@ -27,14 +27,14 @@ public class UserRepositoryTest extends IntegrationTest {
   }
 
   /**
-   * Creates a user.
+   * Create admin user.
    *
    * @return the user
    */
-  public static User createUser() {
+  public static User createAdminUser() {
     User user = new User();
-    user.setId("id2");
-    user.setName("test2");
+    user.setId(ADMIN_USER_ID);
+    user.setName(ADMIN_USER_NAME);
     return user;
   }
 }

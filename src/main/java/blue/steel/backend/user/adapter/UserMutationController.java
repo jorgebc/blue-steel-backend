@@ -1,6 +1,7 @@
 package blue.steel.backend.user.adapter;
 
 import blue.steel.backend.core.usecase.UseCase;
+import blue.steel.backend.core.util.SecurityUtils;
 import blue.steel.backend.user.adapter.dto.UpdateUserInput;
 import blue.steel.backend.user.adapter.dto.UpdateUserPayload;
 import blue.steel.backend.user.persistence.User;
@@ -28,7 +29,11 @@ public class UserMutationController {
    */
   @MutationMapping
   public UpdateUserPayload updateUser(@Argument @Valid @NotNull UpdateUserInput input) {
-    UpdateUserUseCaseInput updateUserInput = input.toUpdateUseCaseInput();
+    String userId = SecurityUtils.getUserId();
+    String name = input.getName();
+    String imageUrl = input.getImageUrl();
+    UpdateUserUseCaseInput updateUserInput =
+        UpdateUserUseCaseInput.builder().userId(userId).name(name).imageUrl(imageUrl).build();
     UpdateUserUseCaseOutput updateUserOutput = updateUser.execute(updateUserInput);
 
     User user = updateUserOutput.getUser();

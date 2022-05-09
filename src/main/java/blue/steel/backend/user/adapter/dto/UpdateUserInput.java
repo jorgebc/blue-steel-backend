@@ -10,7 +10,6 @@ import lombok.Value;
 @Value
 @Builder
 public class UpdateUserInput {
-  @NotEmpty String userId;
   @NotEmpty String name;
   @NotEmpty String imageUrl;
 
@@ -21,6 +20,6 @@ public class UpdateUserInput {
    */
   @JsonIgnore
   public UpdateUserUseCaseInput toUpdateUseCaseInput() {
-    return UpdateUserUseCaseInput.builder().userId(userId).name(name).imageUrl(imageUrl).build();
+    return UpdateUserUseCaseInput.builder().name(name).imageUrl(imageUrl).build();
   }
 }

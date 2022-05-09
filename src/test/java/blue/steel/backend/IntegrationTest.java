@@ -23,8 +23,8 @@ import org.springframework.test.annotation.DirtiesContext;
 public abstract class IntegrationTest {
 
   protected static final String VALID_JWT_TOKEN = "token";
-  protected static final String ADMIN_USER_ID = "auth0|id";
-  protected static final String ADMIN_USER_NAME = "admin";
+  public static final String ADMIN_USER_ID = "auth0|id";
+  public static final String ADMIN_USER_NAME = "admin";
 
   @Autowired private WebGraphQlTester graphQlTester;
   @MockBean private JwtDecoder jwtDecoder;

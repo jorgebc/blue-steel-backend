@@ -8,11 +8,9 @@ mutation SetActualCampaign($input: SetActualCampaignInput!) {
             actual
             auditingMetadata {
                 createdBy {
-                    id
                     name
                 }
                 lastModifiedBy {
-                    id
                     name
                 }
                 creationDate

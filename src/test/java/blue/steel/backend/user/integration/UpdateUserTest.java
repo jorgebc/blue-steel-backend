@@ -23,13 +23,12 @@ class UpdateUserTest extends IntegrationTest {
   @DisplayName("Updating a valid user should return a not null user")
   void updateValidUser() {
     // Given an existing user
-    User user = UserRepositoryTest.createUser();
-    user = userRepository.save(user);
+    User user = UserRepositoryTest.createAdminUser();
+    userRepository.save(user);
 
     // And a valid update user input
-    String id = user.getId();
     UpdateUserInput updateUserInput =
-        UpdateUserInput.builder().userId(id).name("new name").imageUrl("new imageUrl").build();
+        UpdateUserInput.builder().name("new name").imageUrl("new imageUrl").build();
 
     // When updating a campaign
     getGraphQlTesterWithAdminJwtToken(UPDATE_USER_QUERY)
@@ -48,9 +47,8 @@ class UpdateUserTest extends IntegrationTest {
     // Given no user
 
     // And a valid update campaign input
-    String id = "userId";
     UpdateUserInput updateUserInput =
-        UpdateUserInput.builder().userId(id).name("new name").imageUrl("new imageUrl").build();
+        UpdateUserInput.builder().name("new name").imageUrl("new imageUrl").build();
 
     // When updating a campaign
     getGraphQlTesterWithAdminJwtToken(UPDATE_USER_QUERY)

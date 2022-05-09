@@ -1,7 +1,6 @@
-query GetUser($input: GetUserInput!) {
-    getUser(input: $input) {
+query GetUser {
+    getUser {
         user {
-            id
             name
             imageUrl
         }

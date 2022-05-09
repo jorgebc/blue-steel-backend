@@ -3,7 +3,6 @@ package blue.steel.backend.user.integration;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import blue.steel.backend.IntegrationTest;
-import blue.steel.backend.user.adapter.dto.GetUserInput;
 import blue.steel.backend.user.persistence.User;
 import blue.steel.backend.user.persistence.UserRepository;
 import blue.steel.backend.user.persistence.UserRepositoryTest;
@@ -22,32 +21,26 @@ class GetUserTest extends IntegrationTest {
   @DisplayName("Fetching for an existing user should return the user")
   void getUser() {
     // Given a user
-    User user = UserRepositoryTest.createUser();
+    User user = UserRepositoryTest.createAdminUser();
     userRepository.save(user);
 
     // When fetching the user
-    String userId = user.getId();
-    GetUserInput getUserInput = new GetUserInput(userId);
     getGraphQlTesterWithAdminJwtToken(GET_USER_QUERY)
-        .variable("input", getUserInput)
         .execute()
         .path("getUser.user")
         .entity(User.class)
 
         // Then response should contain the user
-        .satisfies(fetchedUser -> assertThat(fetchedUser.getId()).isEqualTo(userId));
+        .satisfies(fetchedUser -> assertThat(fetchedUser.getName()).isEqualTo(ADMIN_USER_NAME));
   }
 
   @Test
   @DisplayName("Fetching for a non existing user should return not found error")
   void getNonExistingCampaign() {
     // Given no user
-    String userId = "userId";
-    GetUserInput getUserInput = new GetUserInput(userId);
 
     // When fetching for a campaign
     getGraphQlTesterWithAdminJwtToken(GET_USER_QUERY)
-        .variable("input", getUserInput)
         .execute()
         .errors()
 
