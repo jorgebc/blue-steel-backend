@@ -32,7 +32,7 @@ class UpdateCampaignUseCaseTest extends IntegrationTest {
     // And a valid update campaign input
     UUID id = campaign.getId();
     Integer version = campaign.getVersion();
-    UpdateCampaignInput createCampaignInput =
+    UpdateCampaignInput updateCampaignInput =
         UpdateCampaignInput.builder()
             .id(id)
             .name("new name")
@@ -43,7 +43,7 @@ class UpdateCampaignUseCaseTest extends IntegrationTest {
 
     // When updating a campaign
     getGraphQlTesterWithAdminJwtToken(UPDATE_CAMPAIGN_QUERY)
-        .variable("input", createCampaignInput)
+        .variable("input", updateCampaignInput)
         .execute()
         .path("updateCampaign.campaign")
         .entity(Campaign.class)
