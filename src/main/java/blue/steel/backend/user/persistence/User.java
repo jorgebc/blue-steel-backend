@@ -1,4 +1,4 @@
-package blue.steel.backend.core.persistence;
+package blue.steel.backend.user.persistence;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,4 +15,5 @@ import lombok.Setter;
 public class User {
   @Id private String id;
   @NotNull private String name;
+  private String imageUrl;
 }

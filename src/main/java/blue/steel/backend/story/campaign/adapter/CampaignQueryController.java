@@ -22,6 +22,11 @@ public class CampaignQueryController {
 
   private final CampaignQuery campaignQuery;
 
+  /**
+   * Get all campaigns.
+   *
+   * @return all campaigns
+   */
   @QueryMapping
   public GetCampaignsPayload getCampaigns() {
     Collection<Campaign> campaigns = campaignQuery.findAll();
@@ -29,7 +34,7 @@ public class CampaignQueryController {
   }
 
   /**
-   * Get an existing campaign.
+   * Get a campaign.
    *
    * @param input campaign id
    * @return campaign found

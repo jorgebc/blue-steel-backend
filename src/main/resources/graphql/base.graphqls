@@ -14,8 +14,8 @@ type Mutation {
 }
 
 type User {
-    id: String!
     name: String!
+    imageUrl: String
 }
 
 type AuditMetadata {

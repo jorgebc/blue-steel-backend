@@ -21,14 +21,14 @@ import blue.steel.backend.story.campaign.usecase.dto.UpdateCampaignUseCaseOutput
 import java.util.UUID;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.stereotype.Controller;
 
 /** Campaign mutation controller. */
 @Controller
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class CampaignMutationController {
 
   private final UseCase<CreateCampaignUseCaseInput, CreateCampaignUseCaseOutput> createCampaign;
@@ -54,7 +54,7 @@ public class CampaignMutationController {
   }
 
   /**
-   * Updates an existing campaign.
+   * Update campaign.
    *
    * @param input campaign data
    * @return the updated campaign

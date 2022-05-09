@@ -10,9 +10,7 @@ import lombok.Value;
 @Builder
 public class CreateCampaignUseCaseInput implements UseCaseInput {
   String name;
-
   String description;
-
   String imageUrl;
 
   /**
@@ -20,7 +18,7 @@ public class CreateCampaignUseCaseInput implements UseCaseInput {
    *
    * @return a new campaign from input data
    */
-  public Campaign getCampaign() {
+  public Campaign toCampaign() {
     Campaign campaign = new Campaign();
     campaign.setName(getName());
     campaign.setDescription(getDescription());

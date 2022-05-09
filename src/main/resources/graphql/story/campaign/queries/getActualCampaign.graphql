@@ -7,11 +7,9 @@ query GetActualCampaign {
             imageUrl
             auditingMetadata {
                 createdBy {
-                    id
                     name
                 }
                 lastModifiedBy {
-                    id
                     name
                 }
                 creationDate

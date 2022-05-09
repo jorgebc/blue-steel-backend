@@ -1,0 +1,20 @@
+extend type Query {
+    getUser: GetUserPayload!
+}
+
+extend type Mutation {
+    updateUser(input: UpdateUserInput): UpdateUserPayload!
+}
+
+type GetUserPayload {
+    user: User!
+}
+
+input UpdateUserInput {
+    name: String!
+    imageUrl: String!
+}
+
+type UpdateUserPayload {
+    user: User!
+}

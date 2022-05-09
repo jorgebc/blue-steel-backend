@@ -1,5 +1,6 @@
 package blue.steel.backend.core.persistence;
 
+import blue.steel.backend.user.persistence.User;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
