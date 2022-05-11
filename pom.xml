@@ -16,7 +16,7 @@
     <artifactId>blue-steel-backend</artifactId>
     <name>blue-steel-backend</name>
     <description>Blue steel backend</description>
-    <version>1.1.0-SNAPSHOT</version>
+    <version>1.1.0-RELEASE</version>
 
     <properties>
         <java.version>17</java.version>
