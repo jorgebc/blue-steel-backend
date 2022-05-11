@@ -1,0 +1,15 @@
+query GetLastActivities {
+    getLastActivities {
+        lastActivities {
+            id
+            type
+            name
+            description
+            lastModifiedBy {
+                name
+                imageUrl
+            }
+            lastModifiedDate
+        }
+    }
+}
