@@ -1,12 +1,11 @@
 package blue.steel.backend.story.summary.persistence;
 
-import blue.steel.backend.core.persistence.AuditMetadata;
+import blue.steel.backend.core.persistence.Auditable;
 import blue.steel.backend.core.persistence.Versionable;
 import blue.steel.backend.story.campaign.persistence.Campaign;
 import java.time.LocalDate;
 import java.util.UUID;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
@@ -26,7 +25,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Setter
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Summary implements Versionable {
+public class Summary extends Auditable implements Versionable {
 
   @Version private Integer version;
 
@@ -45,6 +44,4 @@ public class Summary implements Versionable {
 
   @ManyToOne(fetch = FetchType.LAZY)
   private Campaign campaign;
-
-  @Embedded private AuditMetadata auditingMetadata = new AuditMetadata();
 }

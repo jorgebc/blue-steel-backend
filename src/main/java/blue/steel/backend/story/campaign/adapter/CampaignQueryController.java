@@ -6,7 +6,7 @@ import blue.steel.backend.story.campaign.adapter.dto.GetCampaignPayload;
 import blue.steel.backend.story.campaign.adapter.dto.GetCampaignsPayload;
 import blue.steel.backend.story.campaign.persistence.Campaign;
 import blue.steel.backend.story.campaign.usecase.CampaignQuery;
-import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -22,14 +22,19 @@ public class CampaignQueryController {
 
   private final CampaignQuery campaignQuery;
 
+  /**
+   * Get all campaigns.
+   *
+   * @return all campaigns
+   */
   @QueryMapping
   public GetCampaignsPayload getCampaigns() {
-    Collection<Campaign> campaigns = campaignQuery.findAll();
+    List<Campaign> campaigns = campaignQuery.findAll();
     return new GetCampaignsPayload(campaigns);
   }
 
   /**
-   * Get an existing campaign.
+   * Get a campaign.
    *
    * @param input campaign id
    * @return campaign found

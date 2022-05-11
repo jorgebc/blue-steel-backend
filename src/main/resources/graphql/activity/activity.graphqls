@@ -1,0 +1,21 @@
+extend type Query {
+    getLastActivities: GetLastActivityPayload!
+}
+
+enum ActivityType {
+    CAMPAIGN
+    SUMMARY
+}
+
+type Activity {
+    id: UUID!
+    type: ActivityType!
+    name: String!
+    description: String!
+    lastModifiedBy: User!
+    lastModifiedDate: LocalDateTime!
+}
+
+type GetLastActivityPayload {
+    lastActivities: [Activity]
+}

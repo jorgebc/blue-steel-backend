@@ -12,11 +12,9 @@ query GetCampaign($input: GetCampaignInput!) {
                 gameDate
                 auditingMetadata {
                     createdBy {
-                        id
                         name
                     }
                     lastModifiedBy {
-                        id
                         name
                     }
                     creationDate
@@ -26,11 +24,9 @@ query GetCampaign($input: GetCampaignInput!) {
             }
             auditingMetadata {
                 createdBy {
-                    id
                     name
                 }
                 lastModifiedBy {
-                    id
                     name
                 }
                 creationDate

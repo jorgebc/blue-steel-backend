@@ -6,19 +6,17 @@ import blue.steel.backend.story.campaign.persistence.CampaignRepository;
 import blue.steel.backend.story.campaign.usecase.dto.CreateCampaignUseCaseInput;
 import blue.steel.backend.story.campaign.usecase.dto.CreateCampaignUseCaseOutput;
 import javax.transaction.Transactional;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /** Create campaign use case. */
 @Service
 @Transactional
+@AllArgsConstructor
 public class CreateCampaign
     implements UseCase<CreateCampaignUseCaseInput, CreateCampaignUseCaseOutput> {
 
   private final CampaignRepository campaignRepository;
-
-  public CreateCampaign(CampaignRepository campaignRepository) {
-    this.campaignRepository = campaignRepository;
-  }
 
   /**
    * Creates a new campaign.
@@ -28,7 +26,7 @@ public class CreateCampaign
    */
   @Override
   public CreateCampaignUseCaseOutput execute(CreateCampaignUseCaseInput input) {
-    Campaign campaign = input.getCampaign();
+    Campaign campaign = input.toCampaign();
     campaign = campaignRepository.save(campaign);
     return CreateCampaignUseCaseOutput.builder().createdCampaign(campaign).build();
   }
